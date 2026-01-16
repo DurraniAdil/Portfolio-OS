@@ -6,7 +6,7 @@ interface QuickActionsProps {
   onCopyEmail: () => void;
   emailCopied: boolean;
 }
-
+//gon directly save them//
 export const QuickActions: React.FC<QuickActionsProps> = ({ onCopyEmail, emailCopied }) => {
   const actions = [
     { label: 'LinkedIn', icon: '💼', url: 'https://www.linkedin.com/in/durrani-adil-13/' },
@@ -34,8 +34,8 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ onCopyEmail, emailCo
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
         className={`flex items-center gap-2 px-4 py-2 border rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg ${emailCopied
-            ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400'
-            : 'bg-white/5 border-white/10 text-white/60 hover:text-white hover:bg-white/10'
+          ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400'
+          : 'bg-white/5 border-white/10 text-white/60 hover:text-white hover:bg-white/10'
           }`}
       >
         <span>{emailCopied ? '✅' : '📋'}</span>

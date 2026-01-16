@@ -96,7 +96,7 @@ export const ResumeApp: React.FC = () => {
                 </div>
                 <ul className="list-disc ml-4 text-[10px] text-zinc-700 space-y-0.5">
                   <li>Specialized AI Digitization & Linguistic Analysis Suite for digitizing and translating Urdu poetry archives into structured logical objects</li>
-                  <li>Tech Stack: React, TypeScript, Tailwind CSS, Gemini API</li>
+                  <li>Tech Stack: React, TypeScript, Tailwind CSS, AI Integration</li>
                 </ul>
               </div>
               <div>

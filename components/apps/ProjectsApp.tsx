@@ -46,7 +46,7 @@ const DEV_PROJECTS: DevProject[] = [
     date: 'Dec 2024',
     desc: 'Specialized AI Digitization & Linguistic Analysis Suite for digitizing and translating Urdu poetry archives into structured logical objects.',
     features: ['Urdu Poetry Archiving', 'Linguistic Analysis', 'Structured Object Generation'],
-    stack: ['React', 'TypeScript', 'Tailwind', 'Gemini API'],
+    stack: ['React', 'TypeScript', 'Tailwind', 'AI Integration'],
     links: { code: 'https://github.com/durraniadil13' }
   },
   {

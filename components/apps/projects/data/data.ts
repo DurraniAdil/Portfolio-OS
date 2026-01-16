@@ -20,12 +20,12 @@ export const PERSONAL_PROJECTS: PersonalProject[] = [
     description: 'AI-Powered Code Analysis & Deconstruction Tool designed to turn complex source code into beginner-level understanding through semantic AI analysis.',
     bullets: [
       'Built SPA using React 19 + TypeScript for high-performance code deconstruction.',
-      'Integrated Google Gemini 2.5 Flash to generate structured JSON-schema explanations including line-by-line walkthroughs and architectural breakdowns.',
+      'Integrated Advanced LLM Model to generate structured JSON-schema explanations including line-by-line walkthroughs and architectural breakdowns.',
       'Implemented GitHub REST API integration for repository browsing and source code fetching.',
       'Developed Local project browsing using Directory Upload API (webkitdirectory) for client-side privacy.',
       'Designed interactive multi-tab workspace with synced scroll between code and explanation.'
     ],
-    stack: ['React 19', 'TypeScript', 'Tailwind', 'Gemini API', 'GitHub REST API', 'Browser Directory Upload', 'Markdown export'],
+    stack: ['React 19', 'TypeScript', 'Tailwind', 'AI API', 'GitHub REST API', 'Browser Directory Upload', 'Markdown export'],
     links: { github: '#', live: '#' }
   },
   {
@@ -35,13 +35,13 @@ export const PERSONAL_PROJECTS: PersonalProject[] = [
     status: 'Public',
     description: 'Specialized AI Digitization & Linguistic Analysis Suite for digitizing and translating Urdu poetry archives into structured logical objects.',
     bullets: [
-      'Leveraged Gemini 2.5 API for high-fidelity digitization of poetic manuscripts.',
+      'Leveraged Advanced LLM API for high-fidelity digitization of poetic manuscripts.',
       'Enforced persona-based system instructions ("Aref" vs "Seeker") to maintain philosophical nuances.',
       'Built ETL-style multi-modal synthesis to merge disparate PDFs and text files into a unified database.',
       'Implemented automated one-line thematic context generation for cross-lingual analysis.',
       'Engineered an "architectural interface" using React + Tailwind for complex drag-drop processing.'
     ],
-    stack: ['React', 'TypeScript', 'Tailwind', 'Gemini API', 'Prompt engineering', 'Multi-PDF synthesis', 'jsPDF', 'JSON serialization'],
+    stack: ['React', 'TypeScript', 'Tailwind', 'AI API', 'Prompt engineering', 'Multi-PDF synthesis', 'jsPDF', 'JSON serialization'],
     links: { github: '#' }
   },
   {
