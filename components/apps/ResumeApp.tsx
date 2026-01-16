@@ -586,11 +586,21 @@ export const ResumeApp: React.FC = () => {
         <motion.button
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
-          onClick={handleDownloadPDF}
+          onClick={() => {
+            // If a static PDF exists, try to open it
+            const pdfUrl = `${import.meta.env.BASE_URL}media/resume.pdf`;
+            fetch(pdfUrl, { method: 'HEAD' })
+              .then(res => {
+                if (res.ok) window.open(pdfUrl, '_blank');
+                else window.print();
+              })
+              .catch(() => window.print());
+          }}
           className="absolute right-4 px-4 py-2 bg-gradient-to-r from-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-zinc-700 text-white rounded-xl text-[9px] font-black uppercase tracking-widest transition-all shadow-lg shadow-zinc-900/30"
         >
-          DOWNLOAD PDF
+          PRINT / SAVE PDF
         </motion.button>
+
       </motion.div>
 
       {/* PDF View Container */}
@@ -712,17 +722,30 @@ export const ResumeApp: React.FC = () => {
             display: none !important;
           }
 
+          /* Ensure body background is white and obscure everything else */
+          body {
+            visibility: hidden;
+            background: white;
+          }
+
+          /* Show only the resume content */
           .resume-page {
-            max-width: 100%;
+            visibility: visible;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
             margin: 0;
             box-shadow: none;
             page-break-after: always;
           }
 
+          /* Reset resume-paper padding for print */
           .resume-paper {
             padding: 0.5in;
           }
         }
+
       `}</style>
     </div>
   );
