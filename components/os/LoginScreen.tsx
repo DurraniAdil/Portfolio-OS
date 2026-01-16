@@ -44,7 +44,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onReboot }) =
       <div className="relative flex flex-col items-center w-full max-w-xs animate-in fade-in zoom-in duration-500">
         <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl mb-6 group ring-offset-4 ring-offset-transparent ring-white/10 ring-4">
           <img
-            src="media/login.png"
+            src="public/media/login.png"
             alt="User"
             className="w-full h-full object-cover"
           />

@@ -207,7 +207,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/media/bg-clip.mp4" type="video/mp4" />
+        <source src={`${import.meta.env.BASE_URL}media/bg-clip.mp4`} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"></div>
 
