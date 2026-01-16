@@ -587,18 +587,35 @@ export const ResumeApp: React.FC = () => {
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
-            // If a static PDF exists, try to open it
-            const pdfUrl = `${import.meta.env.BASE_URL}media/resume.pdf`;
+            // Mapping of tabs to specific resume files
+            const resumeFiles: Record<ResumeType, string> = {
+              'developer': 'resume_developer.pdf',
+              'writer': 'resume_writer.pdf',
+              'operations': 'resume_operations.pdf'
+            };
+
+            const fileName = resumeFiles[activeTab];
+            const pdfUrl = `${import.meta.env.BASE_URL}media/${fileName}`;
+
+            // Try to download the specific resume, fallback to print
             fetch(pdfUrl, { method: 'HEAD' })
               .then(res => {
-                if (res.ok) window.open(pdfUrl, '_blank');
-                else window.print();
+                if (res.ok) {
+                  const link = document.createElement('a');
+                  link.href = pdfUrl;
+                  link.download = fileName;
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                } else {
+                  window.print();
+                }
               })
               .catch(() => window.print());
           }}
           className="absolute right-4 px-4 py-2 bg-gradient-to-r from-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-zinc-700 text-white rounded-xl text-[9px] font-black uppercase tracking-widest transition-all shadow-lg shadow-zinc-900/30"
         >
-          PRINT / SAVE PDF
+          DOWNLOAD RESUME
         </motion.button>
 
       </motion.div>
