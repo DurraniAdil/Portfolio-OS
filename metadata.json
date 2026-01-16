@@ -1,0 +1,8 @@
+
+{
+  "name": "Portfolio-OS",
+  "description": "A comprehensive Windows 11-inspired OS portfolio featuring three distinct personas: Developer, Writer, and People Ops Lead.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
