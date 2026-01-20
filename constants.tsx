@@ -46,4 +46,5 @@ export const APP_METADATA: Record<AppId, AppMeta> = {
   tictactoe: { title: 'TicTacToe', icon: '❌', category: 'utility', description: 'Casual Gaming' },
   calculator: { title: 'Calc-y.app', icon: '🧮', category: 'utility', description: 'Quick Calculations' },
   editor: { title: 'Notes.app', icon: '📝', category: 'utility', description: 'Pastel Notes Editor' },
+  gallery: { title: 'Gallery', icon: 'media/login.png', category: 'utility', description: 'Photo Gallery' },
 };

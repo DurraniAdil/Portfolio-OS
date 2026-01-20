@@ -21,16 +21,16 @@ export const WRITING_PROJECTS: WritingProject[] = [
     type: 'published',
     role: 'Featured Author',
     publisher: 'The Favourite Tales',
-    year: '2023',
+    year: '2025',
     genre: 'Contemporary Poetry',
     status: 'Published',
-    description: 'A distinguished international anthology curated to showcase diverse literary voices. My contribution focused on the intersection of modern existentialism and traditional poetic forms.',
+    description: 'A distinguished international anthology curated to showcase diverse literary voices. My contribution focused on the intersection of theological crisis and love.',
     highlights: [
       'Selected from a global pool of applicants for featured status.',
-      'Explored themes of cultural identity and digital isolation.',
+      'Explored themes of theological crisis and love.',
       'Contributed to a collection that reached international distribution channels.'
     ],
-    themes: ['Identity', 'Modernity', 'Existentialism'],
+    themes: ['Theological Crisis', 'Love', 'Blasphemy'],
     metrics: 'International Circulation'
   },
   {
@@ -39,7 +39,7 @@ export const WRITING_PROJECTS: WritingProject[] = [
     type: 'published',
     role: 'Lead Contributor',
     publisher: 'Acclaimed Series',
-    year: '2022',
+    year: '2025',
     genre: 'Prose Poetry',
     status: 'Published',
     description: 'An exploration of the celestial and the mundane. This volume experimented with "Literary Entropy"—the transformation of meaning across linguistic filters.',
@@ -57,7 +57,7 @@ export const WRITING_PROJECTS: WritingProject[] = [
     type: 'published',
     role: 'Awarded Author',
     publisher: 'Blue Cloud Publishers',
-    year: '2023',
+    year: '2025',
     genre: 'Anthology / Social Commentary',
     status: 'Published',
     description: 'An anthology honoring the strength and resilience of modern Indian women. This work merged socio-political observation with lyrical narrative.',
@@ -73,18 +73,18 @@ export const WRITING_PROJECTS: WritingProject[] = [
     id: 'nazm-e-adil',
     title: 'Nazm-e-Adil (Vol 1 & 2)',
     type: 'manuscript',
-    role: 'Author / Poet',
-    year: '2024',
+    role: 'Poet',
+    year: '2025',
     genre: 'Sufi Metaphysical Poetry',
     status: 'Editing',
-    description: 'A massive poetic cycle comprising 39 paradoxes. The work acts as a bridge between the physical world of engineering and the metaphysical realm of Sufi mysticism.',
+    description: 'A massive poetic cycle comprising 51 paradoxes. The work acts as a bridge between the physical world of engineering and the metaphysical realm of Sufi mysticism.',
     highlights: [
       'Vol 1: Focuses on the struggle of the self (Nafs) and ego dissolution.',
       'Vol 2: Explores the state of absolute annihilation (Fanaa) and divine unity.',
       'Utilizes binary logic metaphors to explain complex metaphysical concepts.'
     ],
     themes: ['Sufism', 'Paradox', 'Self-Annihilation', 'Logic'],
-    metrics: '39 Poems Complete'
+    metrics: '51 Poems Complete'
   },
   {
     id: 'greek-latin-fragments',
@@ -108,7 +108,7 @@ export const WRITING_PROJECTS: WritingProject[] = [
     title: 'The Metaphysics of Silence',
     type: 'manuscript',
     role: 'Author / Essayist',
-    year: '2024',
+    year: '2025',
     genre: 'Philosophical Non-Fiction',
     status: 'Drafting',
     description: 'An existential investigation into the nature of pain, faith, and quietude. A deep dive into the "architecture of silence" within the human experience.',

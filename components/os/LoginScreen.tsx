@@ -28,10 +28,20 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onReboot }) =
   };
 
   return (
-    <div className="fixed inset-0 bg-cover bg-center flex flex-col items-center justify-between z-[9998] overflow-hidden" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070&auto=format&fit=crop)' }}>
+    <div className="fixed inset-0 flex flex-col items-center justify-between z-[9998] overflow-hidden">
+      {/* cool ahh vid */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src={`${import.meta.env.BASE_URL}media/login-bg.mp4`} type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
-      {/* Clock Display */}
+
       <div className="relative text-white text-center mt-16">
         <h1 className="text-7xl font-light tracking-tighter">
           {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -44,7 +54,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onReboot }) =
       <div className="relative flex flex-col items-center w-full max-w-xs animate-in fade-in zoom-in duration-500">
         <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl mb-6 group ring-offset-4 ring-offset-transparent ring-white/10 ring-4">
           <img
-            src={`${import.meta.env.BASE_URL}media/login.png`}
+            src={`${import.meta.env.BASE_URL}media/wall-bg.png`}
             alt="User"
             className="w-full h-full object-cover"
           />
@@ -62,7 +72,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onReboot }) =
               placeholder="Password"
               className={`w-full px-4 py-3 glass-dark rounded-md text-white outline-none focus:ring-2 ring-blue-500/50 transition-all placeholder:text-white/30 text-center tracking-[0.5em] text-base ${error ? 'ring-red-500/50 animate-shake border-red-500/50' : 'border-white/10'}`}
             />
-            {error && <p className="absolute -bottom-6 left-0 right-0 text-center text-red-400 text-xs font-bold uppercase tracking-widest">Incorrect Password</p>}
+            {error && <p className="absolute -bottom-8 left-0 right-0 text-center text-red-400 text-xs font-bold uppercase tracking-widest">Incorrect Password</p>}
           </div>
 
           <button
@@ -84,6 +94,19 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onReboot }) =
             <span className="text-xl">⚡</span>
           </button>
         </div>
+        <a
+          href="https://durraniadil.github.io/Portfolio-Portal/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-all hover:scale-110"
+          title="Portfolio Portal"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL}media/favicon.png`}
+            alt="Portfolio Portal"
+            className="w-6 h-6 object-contain"
+          />
+        </a>
       </div>
 
       <style>{`

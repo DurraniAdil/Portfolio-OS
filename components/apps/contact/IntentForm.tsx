@@ -144,7 +144,7 @@ export const IntentForm: React.FC<IntentFormProps> = ({ formData, updateForm }) 
         />
       </div>
 
-      {/* Honeypot */}
+      {/* To avoid spam */}
       <input
         type="text"
         name="website"

@@ -1,4 +1,4 @@
-
+//cried 
 import { useState, useCallback } from 'react';
 import { AppId, WindowState, WindowBounds } from '../types';
 import { APP_METADATA, INITIAL_Z_INDEX } from '../constants';
@@ -24,7 +24,6 @@ export const useWindowManager = () => {
       const screenW = window.innerWidth;
       const screenH = window.innerHeight;
 
-      // App-specific window sizes
       const appSizes: Partial<Record<AppId, { w: number; h: number }>> = {
         calculator: { w: 360, h: 580 },
         tictactoe: { w: 450, h: 550 },
@@ -37,7 +36,7 @@ export const useWindowManager = () => {
       const centerY = (screenH - defaultH) / 3;
 
       const offset = prev.length * 30;
-      // Ensure we don't cascade off screen
+      // walk off screen disabled
       const safeX = (centerX + offset + defaultW > screenW) ? centerX : centerX + offset;
       const safeY = (centerY + offset + defaultH > screenH) ? centerY : centerY + offset;
 

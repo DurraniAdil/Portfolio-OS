@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   Activity,
   CheckCircle,
+  Link,
 } from 'lucide-react';
 import {
   BarChart,
@@ -48,7 +49,7 @@ const IMPACT_METRICS = [
 export const PeopleOpsApp: React.FC = () => {
   const [activeModule, setActiveModule] = useState<ModuleId>('overview');
 
-  /* ---------------- OVERVIEW ---------------- */
+  /* overview */
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -72,7 +73,7 @@ export const PeopleOpsApp: React.FC = () => {
       exit={{ opacity: 0 }}
       className="space-y-8 pb-8"
     >
-      {/* KPI STRIP */}
+      {/* kpi strip */}
       <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-4">
         {KPI_DATA.map((kpi) => (
           <div
@@ -89,7 +90,7 @@ export const PeopleOpsApp: React.FC = () => {
         ))}
       </div>
 
-      {/* METRICS + SUMMARY */}
+      {/* metrics & summary */}
       <div className="flex flex-wrap gap-6">
         <div className="flex-[2] min-w-[300px] bg-slate-900 border border-slate-800 rounded-xl p-6">
           <div className="flex justify-between items-center mb-6">
@@ -172,7 +173,7 @@ export const PeopleOpsApp: React.FC = () => {
     </motion.div>
   );
 
-  /* ---------------- PROJECTS ---------------- */
+  /* projects */
 
   const renderProjects = () => (
     <motion.div
@@ -227,7 +228,7 @@ export const PeopleOpsApp: React.FC = () => {
     </motion.div>
   );
 
-  /* ---------------- RECRUITMENT ---------------- */
+  /* recruitment */
 
   const renderRecruitment = () => (
     <motion.div
@@ -278,7 +279,7 @@ export const PeopleOpsApp: React.FC = () => {
     </motion.div>
   );
 
-  /* ---------------- FINANCE ---------------- */
+  /* finance */
 
   const renderFinance = () => (
     <motion.div
@@ -316,7 +317,7 @@ export const PeopleOpsApp: React.FC = () => {
     </motion.div>
   );
 
-  /* ---------------- CERTIFICATIONS ---------------- */
+  /* certifications */
 
   const renderCerts = () => (
     <motion.div
@@ -327,31 +328,37 @@ export const PeopleOpsApp: React.FC = () => {
       className="grid grid-cols-3 gap-6"
     >
       {[
-        { title: 'Human Resources', org: 'GE Aerospace' },
-        { title: 'Strategy Consulting', org: 'BCG' },
-        { title: 'ESG Consultant', org: 'TATA Consultancy' },
+        { title: 'Human Resources', org: 'GE Aerospace', url: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/ay2tsYxaTif7Nt6z7/bAPubTkawzGexc6TT_ay2tsYxaTif7Nt6z7_a34c98gcDixQwcwR6_1746354049218_completion_certificate.pdf" },
+        { title: 'Strategy Consulting', org: 'BCG', url: "https://www.theforage.com/completion-certificates/SKZxezskWgmFjRvj9/ntTvo6ru6Tq3A2JPq_SKZxezskWgmFjRvj9_a34c98gcDixQwcwR6_1763027098328_completion_certificate.pdf" },
+        { title: 'ESG Consultant', org: 'TATA Consultancy', url: "https://www.theforage.com/completion-certificates/ifobHAoMjQs9s6bKS/N8Muuhk6XsXgMTeu2_ifobHAoMjQs9s6bKS_a34c98gcDixQwcwR6_1763618164915_completion_certificate.pdf" },
       ].map((c) => (
-        <div
+        <a
           key={c.title}
-          className="bg-slate-900 border border-slate-800 rounded-xl p-6 text-center"
+          href={c.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-slate-900 border border-slate-800 rounded-xl p-6 text-center hover:border-cyan-500/50 hover:bg-slate-800/50 transition-all cursor-pointer group"
         >
-          <Award className="mx-auto mb-3 text-cyan-400" size={28} />
-          <div className="text-xs uppercase tracking-widest text-slate-500">
+          <Award className="mx-auto mb-3 text-cyan-400 group-hover:scale-110 transition-transform" size={28} />
+          <div className="text-xs uppercase tracking-widest text-slate-500 group-hover:text-slate-400 transition-colors">
             {c.org}
           </div>
-          <div className="text-sm font-bold text-white mt-1">
+          <div className="text-sm font-bold text-white mt-1 group-hover:text-cyan-400 transition-colors">
             {c.title}
           </div>
-        </div>
+          <div className="mt-3 flex items-center justify-center gap-1 text-[10px] uppercase tracking-widest text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity">
+            <Link size={10} /> View Certificate
+          </div>
+        </a>
       ))}
     </motion.div>
   );
 
-  /* ---------------- LAYOUT ---------------- */
+  /* layout */
 
   return (
     <div className="flex h-full bg-[#020617] text-slate-300">
-      {/* SIDEBAR */}
+      {/* sidebar */}
       <aside className="w-64 border-r border-slate-800 bg-slate-950 p-6 space-y-4 overflow-y-auto custom-scrollbar">
         <div className="mb-6">
           <div className="text-xs uppercase tracking-widest text-slate-500">
@@ -386,7 +393,7 @@ export const PeopleOpsApp: React.FC = () => {
         })}
       </aside>
 
-      {/* MAIN */}
+      {/* main */}
       <main className="flex-1 p-10 overflow-y-auto">
         <AnimatePresence mode="wait">
           {activeModule === 'overview' && renderOverview()}

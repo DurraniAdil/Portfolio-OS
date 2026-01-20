@@ -116,7 +116,7 @@ export const EditorApp: React.FC = () => {
 
     return (
         <div className={`h-full flex ${isDarkMode ? 'bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950' : 'bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50'} transition-all duration-700`}>
-            {/* Animated background elements */}
+
             <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-20">
                 <motion.div
                     animate={{
@@ -136,14 +136,12 @@ export const EditorApp: React.FC = () => {
                 />
             </div>
 
-            {/* Sidebar */}
             <motion.div
                 initial={{ x: -320 }}
                 animate={{ x: 0 }}
                 transition={{ type: "spring", damping: 25 }}
                 className={`w-80 flex-shrink-0 flex flex-col backdrop-blur-xl ${isDarkMode ? 'bg-slate-900/50 border-slate-700/50' : 'bg-white/60 border-white/80'} border-r shadow-2xl relative z-10`}
             >
-                {/* Sidebar Header */}
                 <div className={`p-6 border-b ${isDarkMode ? 'border-slate-700/50' : 'border-purple-100/50'}`}>
                     <div className="flex items-center justify-between mb-4">
                         <motion.h1
@@ -151,12 +149,7 @@ export const EditorApp: React.FC = () => {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                         >
-                            <motion.span
-                                animate={{ rotate: [0, 10, -10, 0] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                            >
-                                ✨
-                            </motion.span>
+
                             <span className={`bg-gradient-to-r ${isDarkMode ? 'from-pink-400 to-purple-400' : 'from-pink-600 to-purple-600'} bg-clip-text text-transparent`}>
                                 Notes
                             </span>
@@ -171,7 +164,6 @@ export const EditorApp: React.FC = () => {
                         </motion.button>
                     </div>
 
-                    {/* Search Bar */}
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -193,7 +185,6 @@ export const EditorApp: React.FC = () => {
                         </div>
                     </motion.div>
 
-                    {/* New Note Button */}
                     <div className="relative">
                         <motion.button
                             whileHover={{ scale: 1.02, y: -2 }}
@@ -214,7 +205,6 @@ export const EditorApp: React.FC = () => {
                             <span>New Note</span>
                         </motion.button>
 
-                        {/* Color Picker Dropdown */}
                         <AnimatePresence>
                             {showColorPicker && (
                                 <motion.div
@@ -254,7 +244,7 @@ export const EditorApp: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Notes List */}
+                {/* notes list, dont touch works fine for now */}
                 <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
                     <AnimatePresence mode="popLayout">
                         {filteredNotes.length === 0 ? (
@@ -291,15 +281,15 @@ export const EditorApp: React.FC = () => {
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setActiveNoteId(note.id)}
                                     className={`w-full p-4 rounded-2xl text-left transition-all group relative overflow-hidden shadow-lg hover:shadow-xl ${activeNoteId === note.id
-                                            ? 'ring-2 ring-offset-2 ' + (isDarkMode ? 'ring-purple-500 ring-offset-slate-900' : 'ring-purple-400 ring-offset-purple-50')
-                                            : ''
+                                        ? 'ring-2 ring-offset-2 ' + (isDarkMode ? 'ring-purple-500 ring-offset-slate-900' : 'ring-purple-400 ring-offset-purple-50')
+                                        : ''
                                         }`}
                                     style={{
                                         backgroundColor: getColorStyle(note),
                                         boxShadow: activeNoteId === note.id ? `0 8px 32px ${getAccentColor(note)}40` : undefined
                                     }}
                                 >
-                                    {/* Shimmer effect */}
+
                                     <motion.div
                                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                                         initial={{ x: '-100%' }}
@@ -344,7 +334,7 @@ export const EditorApp: React.FC = () => {
                     </AnimatePresence>
                 </div>
 
-                {/* Footer Stats */}
+                {/* stats for footer */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -365,11 +355,11 @@ export const EditorApp: React.FC = () => {
                 </motion.div>
             </motion.div>
 
-            {/* Main Editor Area */}
+            {/* text area*/}
             <div className="flex-1 flex flex-col relative z-10">
                 {activeNote ? (
                     <>
-                        {/* Editor Toolbar */}
+                        {/* tool bar, future addtions */}
                         <motion.div
                             initial={{ y: -50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
@@ -396,8 +386,8 @@ export const EditorApp: React.FC = () => {
                                     whileTap={{ scale: 0.95 }}
                                     onClick={copyToClipboard}
                                     className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 shadow-md ${isDarkMode
-                                            ? 'bg-slate-800/80 hover:bg-slate-700 text-slate-300'
-                                            : 'bg-white/80 hover:bg-white text-gray-700'
+                                        ? 'bg-slate-800/80 hover:bg-slate-700 text-slate-300'
+                                        : 'bg-white/80 hover:bg-white text-gray-700'
                                         }`}
                                 >
                                     <span>📋</span> Copy
@@ -407,8 +397,8 @@ export const EditorApp: React.FC = () => {
                                     whileTap={{ scale: 0.95 }}
                                     onClick={clearNote}
                                     className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 shadow-md ${isDarkMode
-                                            ? 'bg-slate-800/80 hover:bg-slate-700 text-slate-300'
-                                            : 'bg-white/80 hover:bg-white text-gray-700'
+                                        ? 'bg-slate-800/80 hover:bg-slate-700 text-slate-300'
+                                        : 'bg-white/80 hover:bg-white text-gray-700'
                                         }`}
                                 >
                                     <span>✨</span> Clear
@@ -418,8 +408,8 @@ export const EditorApp: React.FC = () => {
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => setShowDeleteConfirm(true)}
                                     className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 shadow-md ${isDarkMode
-                                            ? 'bg-red-900/50 hover:bg-red-800/70 text-red-300'
-                                            : 'bg-red-50 hover:bg-red-100 text-red-600'
+                                        ? 'bg-red-900/50 hover:bg-red-800/70 text-red-300'
+                                        : 'bg-red-50 hover:bg-red-100 text-red-600'
                                         }`}
                                 >
                                     <span>🗑️</span> Delete
@@ -448,26 +438,26 @@ export const EditorApp: React.FC = () => {
                                     boxShadow: `0 20px 60px ${getAccentColor(activeNote)}30`
                                 }}
                             >
-                                {/* Title Input */}
+                                {/* title input area */}
                                 <input
                                     type="text"
                                     value={activeNote.title}
                                     onChange={(e) => updateNote(activeNote.id, { title: e.target.value })}
                                     placeholder="✏️ Note title..."
                                     className={`w-full text-3xl font-bold bg-transparent border-none outline-none mb-6 pb-4 border-b-2 placeholder:opacity-40 transition-all ${isDarkMode
-                                            ? 'text-white placeholder:text-white/40 border-white/20 focus:border-white/40'
-                                            : 'text-gray-900 placeholder:text-gray-400 border-gray-200 focus:border-gray-400'
+                                        ? 'text-white placeholder:text-white/40 border-white/20 focus:border-white/40'
+                                        : 'text-gray-900 placeholder:text-gray-400 border-gray-200 focus:border-gray-400'
                                         }`}
                                 />
 
-                                {/* Content Textarea */}
+                                {/* Content Textarea Area */}
                                 <textarea
                                     value={activeNote.content}
                                     onChange={(e) => updateNote(activeNote.id, { content: e.target.value })}
-                                    placeholder="Start writing your thoughts... ✨"
+                                    placeholder="Start writing your thoughts..."
                                     className={`w-full h-[calc(100%-6rem)] bg-transparent border-none outline-none resize-none text-base leading-loose placeholder:opacity-40 ${isDarkMode
-                                            ? 'text-white/90 placeholder:text-white/30'
-                                            : 'text-gray-800 placeholder:text-gray-400'
+                                        ? 'text-white/90 placeholder:text-white/30'
+                                        : 'text-gray-800 placeholder:text-gray-400'
                                         }`}
                                     style={{ fontFamily: "'Inter', 'SF Pro Display', system-ui, sans-serif" }}
                                 />
@@ -475,22 +465,17 @@ export const EditorApp: React.FC = () => {
                         </motion.div>
                     </>
                 ) : (
-                    /* Empty State */
+                    /* state for when its empty */
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="flex-1 flex flex-col items-center justify-center"
                     >
-                        <motion.div
-                            animate={{
-                                y: [0, -20, 0],
-                                rotate: [0, 5, -5, 0]
-                            }}
-                            transition={{ duration: 4, repeat: Infinity }}
-                            className="text-8xl mb-6 opacity-40"
-                        >
-                            ✨
-                        </motion.div>
+                        <img
+                            src={`${import.meta.env.BASE_URL}media/login.png`}
+                            alt="User"
+                            className="w-30 h-30"
+                        />
                         <h2 className={`text-2xl font-bold mb-2 ${isDarkMode ? 'text-slate-300' : 'text-gray-700'}`}>
                             Select a note or create a new one
                         </h2>
@@ -501,7 +486,6 @@ export const EditorApp: React.FC = () => {
                 )}
             </div>
 
-            {/* Delete Confirmation Modal */}
             <AnimatePresence>
                 {showDeleteConfirm && (
                     <motion.div
@@ -534,8 +518,8 @@ export const EditorApp: React.FC = () => {
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setShowDeleteConfirm(false)}
                                     className={`flex-1 py-3 rounded-xl font-semibold transition-all ${isDarkMode
-                                            ? 'bg-slate-700 hover:bg-slate-600 text-white'
-                                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                                        ? 'bg-slate-700 hover:bg-slate-600 text-white'
+                                        : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                                         }`}
                                 >
                                     Cancel
@@ -554,7 +538,7 @@ export const EditorApp: React.FC = () => {
                 )}
             </AnimatePresence>
 
-            {/* Copied Toast */}
+
             <AnimatePresence>
                 {copiedToast && (
                     <motion.div
@@ -562,8 +546,8 @@ export const EditorApp: React.FC = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 50, scale: 0.9 }}
                         className={`fixed bottom-8 right-8 px-6 py-4 rounded-2xl font-semibold text-sm shadow-2xl flex items-center gap-3 ${isDarkMode
-                                ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white'
-                                : 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
+                            ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white'
+                            : 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
                             }`}
                     >
                         <span className="text-xl">✅</span>

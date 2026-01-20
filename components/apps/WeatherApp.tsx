@@ -1,4 +1,5 @@
-
+//i cant think of anything better for the fallback
+//so london it is 
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -68,7 +69,7 @@ export const WeatherApp: React.FC = () => {
       );
       const wData = await weatherRes.json();
 
-      // Helper to decode WMO Codes
+      // helper to decode wmo codes
       const getConditionText = (code: number) => {
         const codes: Record<number, string> = {
           0: 'Clear Sky', 1: 'Mainly Clear', 2: 'Partly Cloudy', 3: 'Overcast',
@@ -85,7 +86,7 @@ export const WeatherApp: React.FC = () => {
       const hourly = wData.hourly;
       const daily = wData.daily;
 
-      // Process Hourly Data
+      // process hourly data
       const currentHour = new Date().getHours();
       const hourlyIndex = hourly.time.findIndex((t: string) => new Date(t).getHours() === currentHour);
       const startIndex = hourlyIndex !== -1 ? hourlyIndex : 0;
@@ -96,7 +97,7 @@ export const WeatherApp: React.FC = () => {
         condition: getConditionText(hourly.weather_code[startIndex + i])
       }));
 
-      // Process Daily Forecast
+      // process daily forecast
       const forecastData: ForecastDay[] = daily.time.slice(0, 5).map((t: string, i: number) => ({
         day: new Date(t).toLocaleDateString([], { weekday: 'short' }),
         highC: daily.temperature_2m_max[i],
@@ -104,7 +105,7 @@ export const WeatherApp: React.FC = () => {
         condition: getConditionText(daily.weather_code[i])
       }));
 
-      // Get Visibility (convert meters to km)
+      // get visibility (convert meters to km)
       const visMeters = hourly.visibility ? hourly.visibility[startIndex] : 10000;
       const visKm = (visMeters / 1000).toFixed(1) + " km";
 
@@ -145,7 +146,7 @@ export const WeatherApp: React.FC = () => {
             },
             async (err) => {
               console.warn("Geolocation failed, falling back to default.", err);
-              // Fallback to London if geo fails (e.g. insecure origin)
+              // viva la london ig
               await fetchWeatherData(51.5074, -0.1278, "London (Fallback)");
               resolve(true);
             },
@@ -153,7 +154,7 @@ export const WeatherApp: React.FC = () => {
           );
         });
       } catch (e) {
-        // Ultimate fallback
+        // double catch
         await fetchWeatherData(51.5074, -0.1278, "London (Fallback)");
       }
     };
@@ -184,7 +185,7 @@ export const WeatherApp: React.FC = () => {
   const setAsWallpaper = () => {
     const wall = getThemeWallpaper();
     if (wall) {
-      // We can use a custom event to tell the Desktop to change wallpaper
+      // custom event to set wallpaper
       window.dispatchEvent(new CustomEvent('setWallpaper', { detail: wall }));
     }
   };
@@ -235,13 +236,13 @@ export const WeatherApp: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col bg-zinc-950 text-white font-sans selection:bg-blue-500/30">
-      {/* Dynamic Background */}
+
       <div className={`absolute inset-0 opacity-20 pointer-events-none transition-all duration-1000 bg-gradient-to-br ${weather.condition.toLowerCase().includes('rain') ? 'from-indigo-900 via-zinc-950 to-black' :
         weather.condition.toLowerCase().includes('cloud') ? 'from-slate-800 via-zinc-950 to-black' :
           'from-blue-900 via-zinc-950 to-black'
         }`} />
 
-      {/* Top Utility Bar */}
+
       <header className="h-16 shrink-0 flex items-center justify-between px-8 border-b border-white/5 bg-black/40 backdrop-blur-md relative z-10">
         <div className="flex items-center gap-4">
           <div className="flex flex-col">
@@ -252,12 +253,7 @@ export const WeatherApp: React.FC = () => {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={setAsWallpaper}
-            className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all text-white/60 hover:text-white"
-          >
-            Sync Wallpaper
-          </button>
+
           <div className="flex items-center bg-black/40 border border-white/10 p-1 rounded-lg">
             <button
               onClick={() => setUnit('C')}
@@ -279,16 +275,17 @@ export const WeatherApp: React.FC = () => {
           >
             🔄
           </button>
+
         </div>
       </header>
 
       <main className="flex-1 overflow-y-auto custom-scrollbar relative z-10 p-8">
         <div className="max-w-6xl mx-auto space-y-10">
 
-          {/* Hero Dashboard Grid */}
+
           <div className="grid grid-cols-12 gap-8 items-start">
 
-            {/* Left: Current Main */}
+
             <div className="col-span-5 bg-white/5 border border-white/10 rounded-[2.5rem] p-10 flex flex-col items-center text-center backdrop-blur-xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-6 opacity-10 text-8xl group-hover:scale-110 transition-transform duration-700">
                 {getWeatherIcon(weather.condition)}
@@ -312,7 +309,6 @@ export const WeatherApp: React.FC = () => {
               </div>
             </div>
 
-            {/* Right: Extended Details */}
             <div className="col-span-7 grid grid-cols-3 gap-4">
               {[
                 { label: 'Feels Like', value: `${convertTemp(weather.feelsLikeC)}°`, icon: '🌡️' },
@@ -332,7 +328,6 @@ export const WeatherApp: React.FC = () => {
             </div>
           </div>
 
-          {/* Hourly Forecast Strip */}
           <section className="bg-white/5 border border-white/10 rounded-[2rem] p-8 backdrop-blur-md overflow-hidden">
             <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8 border-b border-white/5 pb-4">Chronological Projection (12H)</h3>
             <div className="flex gap-8 overflow-x-auto pb-6 scrollbar-hide snap-x">
@@ -346,7 +341,7 @@ export const WeatherApp: React.FC = () => {
             </div>
           </section>
 
-          {/* 5-Day Outlook */}
+          {/* five days outlook on the weather */}
           <div className="grid grid-cols-2 gap-8">
             <section className="bg-white/5 border border-white/10 rounded-[2rem] p-8">
               <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8 border-b border-white/5 pb-4">Weekly Extrapolation</h3>
@@ -386,7 +381,7 @@ export const WeatherApp: React.FC = () => {
         </div>
       </main>
 
-      {/* OS Footer Sync */}
+      {/* footer sync */}
       <footer className="h-10 bg-black/60 border-t border-white/5 px-8 flex items-center justify-between shrink-0 relative z-20">
         <div className="flex gap-6 text-[9px] font-black uppercase tracking-widest">
           <span className="flex items-center gap-1.5 text-zinc-600">

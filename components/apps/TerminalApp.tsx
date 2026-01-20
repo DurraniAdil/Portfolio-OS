@@ -10,10 +10,10 @@ const FILES = {
   'stack.json': JSON.stringify({
     frontend: ["React", "Next.js", "TypeScript", "Tailwind"],
     backend: ["Node.js", "PostgreSQL", "Go", "Redis"],
-    tools: ["Docker", "AWS", "Terraform", "Git"]
+    tools: ["Vite", "VS Code", "Figma", "Git"]
   }, null, 2),
   'manifesto.md': "# The Digital Craft\n\nCode is not just logic; it is a canvas. We are the painters of the modern age, using bits and pixels to create experiences that define reality for millions.",
-  'contact.csv': "Platform,Handle\nLinkedIn,durrani-s\nGitHub,durrani-dev\nTwitter,@durrani_os"
+  'contact.csv': "Platform,Handle\nLinkedIn,durraniadil13\nGitHub,DurraniAdil\nInstagram,@durrani.hw"
 };
 
 const APP_LIST: AppId[] = ['studio', 'bard', 'peopleops', 'projects', 'resume', 'contact', 'terminal', 'weather', 'tictactoe'];
@@ -63,6 +63,30 @@ export const TerminalApp: React.FC<TerminalAppProps> = ({ onOpenApp }) => {
       setHistory(prev => [...prev, line]);
       await new Promise(resolve => setTimeout(resolve, 150));
     }
+
+    // wait a moment then start reboot sequence
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    const rebootSequence = [
+      "",
+      "INITIATING SYSTEM RECOVERY...",
+      "RESTORING KERNEL INTEGRITY...",
+      "FLUSHING MEMORY BUFFERS [##########] 100%",
+      "RELOADING SYSTEM MODULES...",
+      "",
+      "REBOOTING ENTIRE SYSTEM...",
+      ""
+    ];
+
+    for (const line of rebootSequence) {
+      setHistory(prev => [...prev, line]);
+      await new Promise(resolve => setTimeout(resolve, 200));
+    }
+
+    // trigger full system reboot
+    await new Promise(resolve => setTimeout(resolve, 500));
+    window.dispatchEvent(new CustomEvent('systemReboot'));
+
     setIsHacking(false);
   };
 
@@ -91,6 +115,7 @@ export const TerminalApp: React.FC<TerminalAppProps> = ({ onOpenApp }) => {
         newHistory.push("  whoami    - Display current user information");
         newHistory.push("  date      - Display the current system date and time");
         newHistory.push("  neofetch  - Display system information and branding");
+        newHistory.push("  portal    - Open the Portfolio Portal");
         newHistory.push("  matrix    - Enter the digital rain");
         newHistory.push("  hack      - Execute kernel override sequence");
         newHistory.push("  clear     - Clear the terminal screen");
@@ -149,9 +174,27 @@ export const TerminalApp: React.FC<TerminalAppProps> = ({ onOpenApp }) => {
         newHistory.push("  Uptime: 1 hour, 24 mins");
         newHistory.push("  Shell: dsh 1.2");
         newHistory.push("  WM: Durrani-Glass");
-        newHistory.push("  CPU: Intel i9-14900K (24) @ 6.0GHz");
-        newHistory.push("  GPU: NVIDIA RTX 4090 Ti");
+        newHistory.push("  CPU: Intel i7-12700H (14) @ 4.8GHz");
+        newHistory.push("  GPU: NVIDIA RTX 3080");
         newHistory.push("  Memory: 32GB / 64GB");
+        break;
+
+      case 'portal':
+        newHistory.push("");
+        newHistory.push("╔══════════════════════════════════════════════════╗");
+        newHistory.push("║           PORTFOLIO PORTAL ACCESS                ║");
+        newHistory.push("╠══════════════════════════════════════════════════╣");
+        newHistory.push("║                                                  ║");
+        newHistory.push("║  https://durraniadil.github.io/Portfolio-Portal/ ║");
+        newHistory.push("║                                                  ║");
+        newHistory.push("║  Choose your preferred portfolio experience:     ║");
+        newHistory.push("║  • Desktop OS → Full immersive simulation        ║");
+        newHistory.push("║  • Mobile App → Streamlined social-feed UI       ║");
+        newHistory.push("║                                                  ║");
+        newHistory.push("╚══════════════════════════════════════════════════╝");
+        newHistory.push("");
+        newHistory.push("Opening portal in new tab...");
+        window.open("https://durraniadil.github.io/Portfolio-Portal/", "_blank");
         break;
 
       case 'matrix':

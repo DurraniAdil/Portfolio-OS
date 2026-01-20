@@ -24,12 +24,11 @@ export const WritingProjectModal: React.FC<WritingProjectModalProps> = ({ projec
         exit={{ opacity: 0, scale: 0.9, y: 30 }}
         className="relative w-full max-w-5xl bg-[#fdfcf8] rounded-sm overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.5)] flex flex-col max-h-[90vh] text-stone-900 border-x-8 border-stone-800"
       >
-        {/* Decorative Paper Texture */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
         <button
-          onClick={onClose}
-          className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 hover:bg-stone-200 text-stone-400 hover:text-stone-900 transition-all z-10 border border-stone-200"
+          onClick={(e) => { e.stopPropagation(); onClose(); }}
+          className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 hover:bg-stone-200 text-stone-400 hover:text-stone-900 transition-all z-20 border border-stone-200"
         >
           ✕
         </button>

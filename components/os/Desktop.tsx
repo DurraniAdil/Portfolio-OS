@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { AppId } from '../../types';
 import { APP_METADATA } from '../../constants';
@@ -20,7 +19,7 @@ const PADDING = 15;
 export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
   const iconsList: AppId[] = ['studio', 'bard', 'peopleops', 'projects', 'resume', 'contact', 'terminal', 'weather', 'tictactoe', 'calculator', 'editor'];
 
-  // Group icons
+  // group icons
   const profiles = iconsList.filter(id => APP_METADATA[id].category === 'profile');
   const utilities = iconsList.filter(id => APP_METADATA[id].category === 'utility');
 
@@ -33,7 +32,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
     const maxRows = Math.floor((height - PADDING * 2) / GRID_SIZE) - 1; // buffer for taskbar
     const newPositions: Record<string, IconPos> = {};
 
-    // Place Profiles
+    // place profiles
     profiles.forEach((id, index) => {
       const col = Math.floor(index / maxRows);
       const row = index % maxRows;
@@ -43,7 +42,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
       };
     });
 
-    // Place Utilities (start after profiles columns)
+    // place utilities (start after profiles columns)
     const profileCols = Math.ceil(profiles.length / maxRows);
     utilities.forEach((id, index) => {
       const col = profileCols + Math.floor(index / maxRows);
@@ -57,7 +56,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
     return newPositions;
   };
 
-  // Initial Layout & Resize Listener
+  // layout listener and throw back to the OG state
   useEffect(() => {
     setIconPositions(calculateLayout());
 
@@ -75,7 +74,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
   const [activeSubmenu, setActiveSubmenu] = useState<'view' | 'sort' | null>(null);
   const [iconSize, setIconSize] = useState<'small' | 'large'>('small');
   const [funnyPopup, setFunnyPopup] = useState<'folder' | 'personalize' | null>(null);
-  const [wallpaper, setWallpaper] = useState('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop');
+  const [wallpaper, setWallpaper] = useState('');
 
   const handleMouseDown = (e: React.MouseEvent, id: AppId) => {
     if (e.button !== 0) return;
@@ -88,11 +87,41 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
 
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    setContextMenu({ x: e.clientX, y: e.clientY });
+
+    // approx dims
+    const menuWidth = 192; // w-48 = 12rem = 192px
+    const menuHeight = 280; // approximate height with all items
+    const padding = 10;
+
+    // calculate position that keeps menu on screen
+    let x = e.clientX;
+    let y = e.clientY;
+
+    // adjust if menu would go off right edge
+    if (x + menuWidth + padding > window.innerWidth) {
+      x = window.innerWidth - menuWidth - padding;
+    }
+
+    // adjust if menu would go off bottom edge (accounting for taskbar ~40px)
+    if (y + menuHeight + padding > window.innerHeight - 40) {
+      y = window.innerHeight - menuHeight - padding - 40;
+    }
+
+    // adjust if menu would go off left edge
+    if (x < padding) {
+      x = padding;
+    }
+
+    // adjust if menu would go off top edge
+    if (y < padding) {
+      y = padding;
+    }
+
+    setContextMenu({ x, y });
     setActiveSubmenu(null);
   };
 
-  // Sort icons function
+  // sort func *cried*
   const sortIcons = (type: 'alphabetical' | 'randomized') => {
     const height = window.innerHeight;
     const maxRows = Math.floor((height - PADDING * 2) / GRID_SIZE) - 1;
@@ -113,7 +142,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
     setContextMenu(null);
   };
 
-  // Refresh icons to original layout
+  // refresh icons and we are back to the original layout
   const refreshIcons = () => {
     setIconPositions(calculateLayout());
     setContextMenu(null);
@@ -134,19 +163,19 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
     };
   }, []);
 
-  // Helper to check if a spot is occupied by another icon
+  // finds nearest empty slot in a grid fashion
   const isSpotOccupied = (x: number, y: number, excludeId: AppId, positions: Record<AppId, IconPos>) => {
     return Object.entries(positions).some(([id, pos]) => {
       return id !== excludeId && pos.x === x && pos.y === y;
     });
   };
 
-  // Helper to find the nearest empty slot in a grid fashion
+  // finds nearest empty slot in a grid fashion
   const findAvailableSpot = (targetX: number, targetY: number, currentId: AppId, positions: Record<AppId, IconPos>) => {
     if (!isSpotOccupied(targetX, targetY, currentId, positions)) {
       return { x: targetX, y: targetY };
     }
-    // Search area
+    // search area
     for (let col = 0; col < 10; col++) {
       for (let row = 0; row < 10; row++) {
         const testX = PADDING + (col * GRID_SIZE);
@@ -199,19 +228,26 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
       onContextMenu={handleContextMenu}
       className="relative h-full w-full overflow-hidden select-none"
     >
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src={`${import.meta.env.BASE_URL}media/bg-clip.mp4`} type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"></div>
+      {/* static background image */}
+      {/*i give up */}
+      <div className="absolute inset-0 bg-[#008080]">
+        <img
+          src={`${import.meta.env.BASE_URL}media/wall-bg.png`}
+          alt="Desktop Background"
+          className="w-full h-full object-contain"
+        />
+      </div>
 
-      {/* Category Labels - Dynamic Position */}
+      {/* wallpaper */}
+      {wallpaper && (
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+          style={{ backgroundImage: `url(${wallpaper})` }}
+        />
+      )}
+
+
+      {/* category labels */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20 z-0">
         <div
           className="absolute text-[9px] font-black uppercase tracking-[0.4em] text-white transform -rotate-90 origin-top-left"
@@ -220,9 +256,8 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
             top: `${PADDING + 100}px`
           }}
         >
-          PROFILES
+
         </div>
-        {/* Simple dynamic check: if utilities define a new column, place label there */}
         <div
           className="absolute text-[9px] font-black uppercase tracking-[0.4em] text-white transform -rotate-90 origin-top-left"
           style={{
@@ -230,14 +265,14 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
             top: `${PADDING + 100}px`
           }}
         >
-          UTILITIES
+
         </div>
       </div>
 
-      {/* Desktop Icons */}
+      {/* desk ico */}
       {iconsList.map((id) => {
         const pos = iconPositions[id];
-        if (!pos) return null; // Wait for layout calc
+        if (!pos) return null;
         const isDragging = draggingIcon?.id === id;
 
         return (
@@ -252,9 +287,17 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
             className={`absolute flex flex-col items-center justify-center gap-0.5 rounded hover:bg-white/10 hover:backdrop-blur-md group transition-all duration-75 ${isDragging ? 'opacity-70 scale-105 cursor-grabbing' : 'cursor-grab active:scale-95'} ${iconSize === 'large' ? 'w-24 h-24' : 'w-16 h-16'}`}
           >
             <div className="relative">
-              <span className={`filter drop-shadow-lg pointer-events-none block group-hover:scale-110 transition-transform ${iconSize === 'large' ? 'text-4xl' : 'text-2xl'}`}>
-                {APP_METADATA[id].icon}
-              </span>
+              {APP_METADATA[id].icon.includes('/') || APP_METADATA[id].icon.endsWith('.png') ? (
+                <img
+                  src={APP_METADATA[id].icon.startsWith('http') ? APP_METADATA[id].icon : `${import.meta.env.BASE_URL}${APP_METADATA[id].icon}`}
+                  alt={APP_METADATA[id].title}
+                  className={`filter drop-shadow-lg pointer-events-none block group-hover:scale-110 transition-transform ${iconSize === 'large' ? 'w-10 h-10' : 'w-8 h-8'} object-contain`}
+                />
+              ) : (
+                <span className={`filter drop-shadow-lg pointer-events-none block group-hover:scale-110 transition-transform ${iconSize === 'large' ? 'text-4xl' : 'text-2xl'}`}>
+                  {APP_METADATA[id].icon}
+                </span>
+              )}
             </div>
             <span className={`text-white font-bold drop-shadow-md text-center px-1 pointer-events-none uppercase tracking-tighter opacity-80 group-hover:opacity-100 leading-tight ${iconSize === 'large' ? 'text-[10px]' : 'text-[8px]'}`}>
               {APP_METADATA[id].title}
@@ -313,7 +356,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
             className="fixed glass-dark w-48 rounded-xl p-1 z-[9999] shadow-2xl border border-white/10"
           >
             <div className="space-y-0.5">
-              {/* View with submenu */}
+
               <div
                 className="relative"
                 onMouseEnter={() => setActiveSubmenu('view')}
@@ -344,7 +387,6 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
                 )}
               </div>
 
-              {/* Sort by with submenu */}
               <div
                 className="relative"
                 onMouseEnter={() => setActiveSubmenu('sort')}
@@ -400,7 +442,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
         )}
       </AnimatePresence>
 
-      {/* Funny Popup Modals */}
+      {/* might keep this */}
       <AnimatePresence>
         {funnyPopup && (
           <motion.div
@@ -433,7 +475,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onIconClick, children }) => {
                   <h2 className="text-2xl font-black text-white mb-3">Personalize?</h2>
                   <p className="text-white/60 text-sm mb-6 leading-relaxed">
                     Why do you think I'll let you personalize MY OS?<br />
-                    I spent hours picking this wallpaper!<br />
+                    I spent hours making this wallpaper!<br />
                     <span className="text-xs italic opacity-60">Maybe in version 2.0... maybe.</span>
                   </p>
                 </>

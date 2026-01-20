@@ -18,7 +18,7 @@ const PUBLICATIONS: Publication[] = [
     id: 'nazm',
     title: "Nazm-e-Adil Volume One & Two",
     medium: "Poetic Cycle",
-    year: "2023",
+    year: "2025",
     excerpt: "Sufi-inspired poetic cycle of 50 paradoxical and philosophical poems exploring love, loss, and annihilation of the self.",
     fullContent: "The soul is not a vessel to be filled, but a flame to be fanned. In the quiet intersections of 'Nazm-e-Adil', we find the architecture of silence. These poems were born in the transition between the physical world of engineering and the metaphysical realm of Sufi mysticism. \n\n'Volume One' focuses on the struggle of the self (Nafs), while 'Volume Two' moves towards the dissolution of boundaries (Fanaa). Each poem is a paradox, a binary instruction translated into a heartbeat."
   },
@@ -26,15 +26,15 @@ const PUBLICATIONS: Publication[] = [
     id: 'voices',
     title: "Voices Unbound: Volume Two",
     medium: "The Favourite Tales",
-    year: "2023",
+    year: "2025",
     excerpt: "Featured author in a distinct international anthology celebrating diverse voices in contemporary literature.",
-    fullContent: "Being featured in 'Voices Unbound' was a pivotal moment in my career as a published author. This anthology brought together writers from across the globe, each contributing a unique perspective on the human condition. My contribution focused on the intersection of ancient mythological archetypes and modern existential dread, exploring how our ancestral stories still haunt our digital screens."
+    fullContent: "Being featured in 'Voices Unbound' was a pivotal moment in my career as a published author. This anthology brought together writers from across India, each contributing a unique perspective on the human condition. My contribution focused on the intersection of theology, modern existential dread and love, exploring how blasphemy and love can coexist in the same heart."
   },
   {
     id: 'fragments',
     title: "The Greek & Latin Fragments",
     medium: "Metaphysical Collection",
-    year: "2022",
+    year: "2023",
     excerpt: "Collection of 35 poems integrating myth with metaphysical reflection (13 inspired by Greek literary terms, 22 by Latin quotes).",
     fullContent: "This collection acts as a bridge between the classical and the contemporary. 13 poems are inspired directly by Greek literary terms (like Kairos and Aporia), while 22 are rooted in Latin maxims. The goal was to see if these ancient shells could still hold the weight of modern anxieties."
   },
@@ -42,7 +42,7 @@ const PUBLICATIONS: Publication[] = [
     id: 'stardust',
     title: "Stardust and Sentences: Vol 5",
     medium: "Thoughts and Hymn",
-    year: "2022",
+    year: "2025",
     excerpt: "Co-author in Volume 5 of the acclaimed series, exploring the intersection of the celestial and the mundane.",
     fullContent: "A collaboration that pushed the boundaries of sentence structure. In this volume, we experimented with the concept of 'Literary Entropy'—how meaning degrades or transforms as it passes through different cultural and linguistic filters."
   },
@@ -50,7 +50,7 @@ const PUBLICATIONS: Publication[] = [
     id: 'novel',
     title: "Philosophical Novel (Draft)",
     medium: "Work in Progress",
-    year: "2025",
+    year: "2024",
     excerpt: "Developing 80-page philosophical novel exploring the existence of God and existential themes.",
     fullContent: "A work in progress that attempts to reconcile the logical rigor of engineering with the fluid, often chaotic nature of faith. The novel follows a protagonist who attempts to build a 'logical proof' for God, only to find that the proof itself unravels his reality."
   }
@@ -122,10 +122,10 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
               >
                 <div className="absolute top-0 right-0 p-8 opacity-5 text-[15rem] font-serif leading-none select-none italic">“</div>
                 <div className="relative z-10">
-                  <span className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-4 block">Creative Non-Fiction Project</span>
-                  <h4 className="newspaper text-3xl font-bold mb-6 text-white italic">The Metaphysics of Silence</h4>
+                  <span className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-4 block">Diwaan-e-Adil</span>
+                  <h4 className="newspaper text-3xl font-bold mb-6 text-white italic">Nazm-e-Adil</h4>
                   <p className="text-slate-400 text-lg italic leading-relaxed max-w-2xl mb-8">
-                    "Merging poetic prose with philosophical reflection to explore the metaphysics of pain, illness, faith, and silence. Over 15,000 words of existential investigation."
+                    "Merging poems with philosophical reflection to explore the metaphysics of pain, illness, faith, and silence. 51 nazm's and counting"
                   </p>
                   <div className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-wider group-hover:gap-4 transition-all">
                     Open Sample Reader <span className="text-blue-400">→</span>
@@ -194,7 +194,7 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
           <motion.div key="awards" {...containerVariants} className="grid grid-cols-2 gap-6">
             {[
               { title: "Consistent Gold Medalist", year: "7-Year Streak", org: "28 First-place honors in Essay, Poetry & Speech" },
-              { title: "Award Recipient 'She Raises'", year: "2023", org: "Blue Cloud Publishers (International)" },
+              { title: "Award Recipient 'She Raises'", year: "2025", org: "Blue Cloud Publishers (International)" },
               { title: "Published Author (3x)", year: "Active", org: "Featured in 3 distinct international anthologies" },
               { title: "SEO Performance Milestone", year: "2024", org: "15% Organic Traffic Increase for Nettv4u" }
             ].map((award, i) => (
@@ -217,7 +217,7 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
               { category: 'Technical Tools', skills: ['WordPress', 'Google Analytics', 'SEMrush/Ahrefs', 'MS Office Suite', 'Grammarly', 'Hemingway Editor', 'Social Media Platforms', 'Canva'] }
             ].map(cat => (
               <div key={cat.category}>
-                <h4 className="text-[10px] uppercase font-bold tracking-[0.3em] text-slate-300 mb-6 px-1">{cat.category}</h4>
+                <h4 className="text-[10px] uppercase font-bold tracking-[0.3em] text-blue-500 mb-6 px-1">{cat.category}</h4>
                 <div className="flex flex-wrap gap-3">
                   {cat.skills.map((skill, si) => (
                     <motion.span
@@ -240,7 +240,7 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
 
   return (
     <div className="flex h-full bg-white font-sans text-slate-900 overflow-hidden relative">
-      {/* Sample Reader Side Drawer */}
+      {/* side reader */}
       <AnimatePresence>
         {readingSample && (
           <>
@@ -282,7 +282,7 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
         )}
       </AnimatePresence>
 
-      {/* Left Sidebar */}
+      {/* sidebar left side*/}
       <aside className="w-72 border-r border-slate-100 flex flex-col bg-slate-50/50 shrink-0 overflow-y-auto custom-scrollbar">
         <div className="p-6">
           <div className="flex items-center gap-4 mb-16">
@@ -328,7 +328,6 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
         </div>
       </aside>
 
-      {/* Main Container */}
       <main className="flex-1 flex flex-col min-w-0 bg-white">
         <header className="h-24 border-b border-slate-50 flex items-center justify-between px-12 shrink-0">
           <div className="flex items-center gap-3">
@@ -336,6 +335,22 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">{activeTab}</span>
           </div>
           <div className="flex items-center gap-3">
+            <a
+              href="https://drive.google.com/file/d/11s9_CrIlTDhfqEskAWiurCk8dPt2Ls5A/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50 transition-all border border-slate-100 shadow-sm active:scale-95"
+            >
+              Certifications
+            </a>
+            <a
+              href="https://drive.google.com/file/d/11xE24WL8CzOfmG2IZjeQhEuSnBKXm76p/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-slate-200 hover:translate-y-[-2px] active:translate-y-[1px] transition-all"
+            >
+              Portfolio
+            </a>
             <a
               href="https://www.linkedin.com/in/durrani-adil-13/"
               target="_blank"
@@ -359,7 +374,7 @@ export const BardApp: React.FC<BardAppProps> = ({ onOpenApp }) => {
               {renderContent()}
             </AnimatePresence>
           </div>
-          {/* Footer spacer */}
+          {/* space for footer */}
           <div className="h-24" />
         </div>
       </main>

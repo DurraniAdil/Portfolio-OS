@@ -5,8 +5,8 @@
 **DurraniOS** is my hyper-immersive, browser-based operating system serving as my digital portfolio. I designed it to bridge the gap between my work in software engineering, creative writing, and people operations through a unified, desktop-like interface.
 
 > **System Requirement:** Optimized for desktop / laptop displays (1024px+). 
-> *A mobile-responsive adapter is currently in development.*
-
+> *Access the mobile-responsive adapter [here](https://github.com/DurraniAdil/Portfolio-App)*
+> **And to access this one go here [here](https://durraniadil.github.io/Portfolio-OS/)**
 ---
 
 ## System Architecture (Apps)
@@ -46,3 +46,10 @@ I built this with a focus on performance, interactivity, and aesthetics:
 *   **LinkedIn**: [linkedin.com/in/durrani-adil-13/](https://www.linkedin.com/in/durrani-adil-13/)
 *   **GitHub**: [github.com/durraniadil13](https://github.com/durraniadil13)
 *   **Email**: durraniadil13@gmail.com
+
+---
+
+## Related Projects
+
+*   **Portfolio Portal**: [github.com/DurraniAdil/Portfolio-Portal](https://github.com/DurraniAdil/Portfolio-Portal)
+*   **Portfolio App (Mobile)**: [github.com/DurraniAdil/Portfolio-App](https://github.com/DurraniAdil/Portfolio-App)

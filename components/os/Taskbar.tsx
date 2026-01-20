@@ -1,7 +1,24 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { AppId, WindowState } from '../../types';
 import { APP_METADATA } from '../../constants';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Power,
+  RotateCcw,
+  Trash2,
+  Monitor,
+  Wifi,
+  Bluetooth,
+  Plane,
+  Volume2,
+  VolumeX,
+  Battery,
+  Globe,
+  Pin,
+  Smartphone,
+  X
+} from 'lucide-react';
 
 interface TaskbarProps {
   windows: WindowState[];
@@ -33,6 +50,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [isActionCenterOpen, setIsActionCenterOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
 
   // Quick Settings States
   const [volume, setVolume] = useState(80);
@@ -48,7 +66,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
     return () => clearInterval(timer);
   }, []);
 
-  // Close context menu when clicking outside
+
   useEffect(() => {
     const handleClickOutside = () => setContextMenu(null);
     if (contextMenu) {
@@ -57,21 +75,19 @@ export const Taskbar: React.FC<TaskbarProps> = ({
     }
   }, [contextMenu]);
 
-  // Compute which apps to show: open apps + pinned apps (deduplicated, preserve order)
+
   const openAppIds = windows.map(w => w.id);
   const displayedApps = useMemo(() => {
     const apps = new Set<AppId>();
-    // First add pinned apps (in order)
     pinnedApps.forEach(id => apps.add(id));
-    // Then add open apps that aren't already pinned
+
     openAppIds.forEach(id => apps.add(id));
     return Array.from(apps);
   }, [pinnedApps, openAppIds.join(',')]);
 
-  // 🎨 CUSTOMIZE ICONS HERE
 
   const customIcons: Partial<Record<AppId, React.ReactNode>> = {
-
+    gallery: <img src={`${import.meta.env.BASE_URL}media/login.png`} alt="Gallery" className="w-5 h-5 object-contain" />,
   };
 
   const handleStartOption = (action: () => void) => {
@@ -84,8 +100,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
     e.stopPropagation();
     setContextMenu({ appId, x: e.clientX, y: e.clientY });
   };
-
-  // Simple Calendar Generator
+  //calender
   const renderCalendar = () => {
     const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     const currentYear = time.getFullYear();
@@ -129,7 +144,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
   return (
     <div className="fixed bottom-0 left-0 right-0 h-auto min-h-[2rem] py-0.5 glass flex items-center z-[9000] justify-between overflow-visible shadow-[0_-4px_24px_rgba(0,0,0,0.5)] transition-all border-t border-white/5">
 
-      {/* --- START MENU AREA --- */}
+
       <div className="flex-none w-[30%] flex items-center h-full px-3 gap-2 relative">
         <button
           className={`w-7 h-7 flex items-center justify-center rounded-lg transition-all group relative active:scale-90 ${isStartMenuOpen ? 'bg-white/20 shadow-lg' : 'hover:bg-white/10'}`}
@@ -152,21 +167,26 @@ export const Taskbar: React.FC<TaskbarProps> = ({
             >
               <div className="px-3 py-2 text-[9px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">System Control</div>
               <button onClick={() => handleStartOption(onShutdown)} className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-red-500/20 rounded-xl transition-all group text-left">
-                <span className="text-lg grayscale group-hover:grayscale-0">🛑</span>
+                <Power size={16} className="text-white/40 group-hover:text-red-400 transition-colors" />
                 <span className="text-xs font-bold text-white/70 group-hover:text-white uppercase tracking-tighter">Shutdown System</span>
               </button>
               <button onClick={() => handleStartOption(onRestart)} className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-blue-500/20 rounded-xl transition-all group text-left">
-                <span className="text-lg grayscale group-hover:grayscale-0">🔄</span>
+                <RotateCcw size={16} className="text-white/40 group-hover:text-blue-400 transition-colors" />
                 <span className="text-xs font-bold text-white/70 group-hover:text-white uppercase tracking-tighter">Restart OS</span>
               </button>
               <div className="h-[1px] bg-white/5 my-1 mx-2"></div>
               <button onClick={() => handleStartOption(onClearTabs)} className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/10 rounded-xl transition-all group text-left">
-                <span className="text-lg grayscale group-hover:grayscale-0">🧹</span>
+                <Trash2 size={16} className="text-white/40 group-hover:text-white transition-colors" />
                 <span className="text-xs font-bold text-white/70 group-hover:text-white uppercase tracking-tighter">Clear All Tabs</span>
               </button>
               <button onClick={() => handleStartOption(onShowDesktop)} className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/10 rounded-xl transition-all group text-left">
-                <span className="text-lg grayscale group-hover:grayscale-0">🖥️</span>
+                <Monitor size={16} className="text-white/40 group-hover:text-white transition-colors" />
                 <span className="text-xs font-bold text-white/70 group-hover:text-white uppercase tracking-tighter">Show Desktop</span>
+              </button>
+              <div className="h-[1px] bg-white/5 my-1 mx-2"></div>
+              <button onClick={() => { setIsStartMenuOpen(false); setIsQRModalOpen(true); }} className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-cyan-500/20 rounded-xl transition-all group text-left">
+                <img src={`${import.meta.env.BASE_URL}media/login.png`} alt="Link" className="w-4 h-4 object-contain opacity-60 group-hover:opacity-100 transition-opacity" />
+                <span className="text-xs font-bold text-white/70 group-hover:text-cyan-400 uppercase tracking-tighter">Link Your Device</span>
               </button>
             </motion.div>
           )}
@@ -177,7 +197,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
         </button>
       </div>
 
-      {/* --- CENTERED APP LIST --- */}
+
       <div className="flex-1 flex items-center justify-center h-full overflow-x-auto no-scrollbar scroll-smooth px-2">
         {displayedApps.length > 0 ? (
           <div className="flex items-center gap-2 bg-black/20 p-1 rounded-xl border border-white/5 min-w-max">
@@ -195,7 +215,6 @@ export const Taskbar: React.FC<TaskbarProps> = ({
                     <span className={`text-lg transition-transform ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
                       {customIcons[id] || APP_METADATA[id].icon}
                     </span>
-                    {/* Indicator: wider line for open apps, dot for pinned-only */}
                     {isOpen && <div className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1.5px] rounded-full transition-all ${isActive ? 'w-3 bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]' : 'w-1 bg-white/40'}`}></div>}
                     {!isOpen && isPinned && <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white/20"></div>}
                   </button>
@@ -219,7 +238,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
         )}
       </div>
 
-      {/* Context Menu */}
+
       <AnimatePresence>
         {contextMenu && (
           <motion.div
@@ -261,14 +280,14 @@ export const Taskbar: React.FC<TaskbarProps> = ({
             setIsCalendarOpen(false);
             setIsStartMenuOpen(false);
           }}
-          className={`flex gap-2 px-1.5 py-0.5 rounded-lg transition-all border border-transparent ${isActionCenterOpen ? 'bg-white/20 border-white/10 shadow-lg' : 'hover:bg-white/10'}`}
+          className={`flex items-center gap-2 px-1.5 py-0.5 rounded-lg transition-all border border-transparent ${isActionCenterOpen ? 'bg-white/20 border-white/10 shadow-lg' : 'hover:bg-white/10'}`}
         >
-          <span className={`text-xs transition-opacity ${btEnabled ? 'opacity-100' : 'opacity-30'}`}>🌐</span>
-          <span className={`text-xs transition-opacity ${volume > 0 ? 'opacity-100' : 'opacity-30'}`}>{volume === 0 ? '🔇' : '🔊'}</span>
-          <span className="text-xs">🔋</span>
+          <Globe size={12} className={`transition-opacity ${wifiEnabled ? 'text-white/80' : 'text-white/30'}`} />
+          {volume === 0 ? <VolumeX size={12} className="text-white/30" /> : <Volume2 size={12} className="text-white/80" />}
+          <Battery size={12} className="text-white/80" />
         </button>
 
-        {/* Action Center Flyout */}
+
         <AnimatePresence>
           {isActionCenterOpen && (
             <motion.div
@@ -278,22 +297,33 @@ export const Taskbar: React.FC<TaskbarProps> = ({
               className="absolute bottom-14 right-4 w-72 glass-dark rounded-[1.5rem] border border-white/10 shadow-2xl p-4 overflow-hidden"
             >
               <div className="grid grid-cols-3 gap-2 mb-6">
-                {[
-                  { label: 'Wi-Fi', icon: '🌐', active: wifiEnabled, toggle: () => setWifiEnabled(!wifiEnabled) },
-                  { label: 'Bluetooth', icon: '🦷', active: btEnabled, toggle: () => setBtEnabled(!btEnabled) },
-                  { label: 'Flight', icon: '✈️', active: airplaneMode, toggle: () => setAirplaneMode(!airplaneMode) },
-                ].map(item => (
-                  <button
-                    key={item.label}
-                    onClick={item.toggle}
-                    className="flex flex-col items-center gap-2 group"
-                  >
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl transition-all ${item.active ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' : 'bg-white/5 text-white/40 border border-white/5 hover:bg-white/10'}`}>
-                      {item.icon}
-                    </div>
-                    <span className="text-[8px] font-black uppercase tracking-widest text-white/40 group-hover:text-white/60 transition-colors">{item.label}</span>
-                  </button>
-                ))}
+                <button
+                  onClick={() => setWifiEnabled(!wifiEnabled)}
+                  className="flex flex-col items-center gap-2 group"
+                >
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${wifiEnabled ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' : 'bg-white/5 text-white/40 border border-white/5 hover:bg-white/10'}`}>
+                    <Wifi size={20} />
+                  </div>
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/40 group-hover:text-white/60 transition-colors">Wi-Fi</span>
+                </button>
+                <button
+                  onClick={() => setBtEnabled(!btEnabled)}
+                  className="flex flex-col items-center gap-2 group"
+                >
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${btEnabled ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' : 'bg-white/5 text-white/40 border border-white/5 hover:bg-white/10'}`}>
+                    <Bluetooth size={20} />
+                  </div>
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/40 group-hover:text-white/60 transition-colors">Bluetooth</span>
+                </button>
+                <button
+                  onClick={() => setAirplaneMode(!airplaneMode)}
+                  className="flex flex-col items-center gap-2 group"
+                >
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${airplaneMode ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' : 'bg-white/5 text-white/40 border border-white/5 hover:bg-white/10'}`}>
+                    <Plane size={20} />
+                  </div>
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/40 group-hover:text-white/60 transition-colors">Flight</span>
+                </button>
               </div>
 
               <div className="space-y-4">
@@ -303,7 +333,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
                     <span className="text-[9px] font-black text-blue-400">{volume}%</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs">🔊</span>
+                    {volume === 0 ? <VolumeX size={14} className="text-white/40" /> : <Volume2 size={14} className="text-white/60" />}
                     <input
                       type="range" min="0" max="100" value={volume}
                       onChange={(e) => setVolume(parseInt(e.target.value))}
@@ -315,18 +345,18 @@ export const Taskbar: React.FC<TaskbarProps> = ({
 
               <div className="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                  <Battery size={14} className="text-emerald-400" />
                   <span className="text-[9px] font-black uppercase text-white/40 tracking-widest">Battery: 85%</span>
                 </div>
                 <button onClick={() => handleStartOption(onShutdown)} className="w-8 h-8 rounded-lg bg-white/5 hover:bg-red-500/20 flex items-center justify-center transition-all group">
-                  <span className="text-sm grayscale group-hover:grayscale-0">🛑</span>
+                  <Power size={14} className="text-white/40 group-hover:text-red-400" />
                 </button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Clock Button */}
+
         <button
           onClick={() => {
             setIsCalendarOpen(!isCalendarOpen);
@@ -343,7 +373,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
           </span>
         </button>
 
-        {/* Calendar Flyout */}
+
         <AnimatePresence>
           {isCalendarOpen && (
             <motion.div
@@ -383,6 +413,55 @@ export const Taskbar: React.FC<TaskbarProps> = ({
           title="Show Desktop"
         />
       </div>
+
+      {isQRModalOpen && createPortal(
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed top-0 left-0 w-screen h-screen bg-black/70 backdrop-blur-md flex items-center justify-center z-[10000]"
+            onClick={() => setIsQRModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative glass-dark rounded-[2rem] border border-white/10 shadow-2xl p-8 max-w-sm text-center"
+            >
+              <button
+                onClick={() => setIsQRModalOpen(false)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all"
+              >
+                <X size={16} className="text-white/60" />
+              </button>
+
+              <div className="w-16 h-16 bg-cyan-500/20 border border-cyan-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <img src={`${import.meta.env.BASE_URL}media/login.png`} alt="Link" className="w-14 h-14 object-contain" />
+              </div>
+
+              <h2 className="text-xl font-black text-white uppercase tracking-tight mb-2">Link Your Device</h2>
+              <p className="text-xs text-white/50 mb-6 leading-relaxed">
+                Scan this QR code with your phone to experience the mobile version of my portfolio.
+              </p>
+
+              <div className="bg-white rounded-2xl p-4 mb-6 inline-block shadow-lg">
+                <img
+                  src={`${import.meta.env.BASE_URL}media/qr-app.png`}
+                  alt="QR Code"
+                  className="w-48 h-48 object-contain"
+                />
+              </div>
+
+              <p className="text-[10px] text-white/30 uppercase tracking-widest font-bold">
+                Portfolio Portal • Mobile Experience
+              </p>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 };

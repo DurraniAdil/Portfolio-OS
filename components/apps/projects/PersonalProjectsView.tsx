@@ -62,7 +62,7 @@ export const PersonalProjectsView: React.FC = () => {
               onClick={() => setSelectedProject(p)}
               className="group bg-zinc-900/50 border border-white/5 rounded-3xl p-8 hover:bg-zinc-900 hover:border-cyan-500/20 transition-all cursor-pointer flex flex-col relative overflow-hidden"
             >
-              {/* Status Badgeee */}
+              {/* status badges */}
               <div className="flex justify-between items-start mb-6">
                 <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-widest border ${p.status === 'Public' ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' :
                   p.status === 'Private' ? 'bg-zinc-800 border-zinc-700 text-zinc-500' :
@@ -70,7 +70,23 @@ export const PersonalProjectsView: React.FC = () => {
                   }`}>
                   {p.status}
                 </span>
-                {p.isPrivate && <span className="text-zinc-700 text-xs">🔒</span>}
+                {/* long way for the svg func */}
+                {p.isPrivate && (
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-zinc-700"
+                  >
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                )}
               </div>
 
               <h3 className="text-2xl font-black text-white group-hover:text-cyan-400 transition-colors tracking-tight mb-2 uppercase">{p.title}</h3>

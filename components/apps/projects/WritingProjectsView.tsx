@@ -14,7 +14,7 @@ export const WritingProjectsView: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col bg-[#fdfcf8] text-stone-900 relative">
-      {/* Decorative Grain Overlay */}
+      {/* overlay*/}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]" />
 
       <div className="h-20 shrink-0 flex items-center justify-between px-10 border-b border-stone-200 bg-white/40 backdrop-blur-md sticky top-0 z-20">
@@ -53,7 +53,7 @@ export const WritingProjectsView: React.FC = () => {
                 className="group cursor-pointer flex flex-col"
               >
                 <div className="aspect-[3/4] mb-6 relative overflow-hidden bg-stone-900 shadow-2xl transition-all group-hover:-translate-y-2 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.3)] border-r-4 border-stone-800">
-                  {/* Book Spine Texture */}
+                  {/* spine texture */}
                   <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/40 to-transparent" />
 
                   <div className="absolute inset-0 p-8 flex flex-col justify-between text-white">

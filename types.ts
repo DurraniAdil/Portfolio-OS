@@ -1,4 +1,4 @@
-export type AppId = 'studio' | 'bard' | 'peopleops' | 'projects' | 'resume' | 'contact' | 'terminal' | 'weather' | 'tictactoe' | 'calculator' | 'editor';
+export type AppId = 'studio' | 'bard' | 'peopleops' | 'projects' | 'resume' | 'contact' | 'terminal' | 'weather' | 'tictactoe' | 'calculator' | 'editor' | 'gallery';
 
 export interface WindowBounds {
   x: number;

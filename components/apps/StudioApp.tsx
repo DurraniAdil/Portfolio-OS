@@ -28,6 +28,19 @@ const PROJECTS: Project[] = [
     links: { live: 'https://durraniadil.github.io/Muse/', code: 'https://github.com/DurraniAdil/Muse' }
   },
   {
+    id: 'be-endless',
+    title: 'BE Endless 3D Studio',
+    date: '2026',
+    desc: 'Premium 3D Printing E-Commerce Platform',
+    bullets: [
+      'Full e-commerce experience with catalog, cart, checkout & wishlist',
+      'Advanced customization for .stl/.obj file uploads & design submissions',
+      'Scroll-triggered animations with fade-in, slide-up & zoom effects'
+    ],
+    tech: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Slick'],
+    links: { live: 'https://www.endless3dprinting.com/', code: 'https://github.com/shahidsk0403/be-endless-3d-studio' }
+  },
+  {
     id: 'dekonstrt',
     title: 'DEKONSTRT',
     date: '2025',
@@ -38,7 +51,7 @@ const PROJECTS: Project[] = [
       'Built with modern React 19 architecture'
     ],
     tech: ['React 19', 'TypeScript', 'Tailwind CSS', 'API Integration'],
-    links: { code: 'https://github.com/DurraniAdil' }
+    links: { code: 'https://github.com/durraniadil13' }
   },
   {
     id: 'thematic',
@@ -51,7 +64,7 @@ const PROJECTS: Project[] = [
       'Integrates Gemini API for intelligent translations'
     ],
     tech: ['React', 'TypeScript', 'Tailwind CSS', 'Gemini API'],
-    links: { code: 'https://github.com/DurraniAdil' }
+    links: { code: 'https://github.com/durraniadil13' }
   },
   {
     id: 'ibneadil',
@@ -64,7 +77,7 @@ const PROJECTS: Project[] = [
       'Custom themed pages with smooth animations'
     ],
     tech: ['React', 'TypeScript', 'Framer Motion', 'Themed Pages'],
-    links: { live: 'https://ibn-e-adil.vercel.app', code: 'https://github.com/DurraniAdil' }
+    links: { code: 'https://github.com/durraniadil13' }
   },
   {
     id: 'notepad',
@@ -104,7 +117,7 @@ const PROJECTS: Project[] = [
     ],
     tech: ['React', 'React Router', 'Bootstrap'],
     links: { code: 'https://github.com/DurraniAdil/Employ-Wise' }
-  }
+  },
 ];
 
 const CompileAnimation = () => {
@@ -190,7 +203,7 @@ export const StudioApp: React.FC = () => {
 
   const renderWorkbench = () => (
     <motion.div key="workbench" {...viewVariants} className="flex flex-row h-full gap-6">
-      {/* Project Explorer */}
+      {/* explorer */}
       <div className="w-1/3 flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar">
         <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Project Artifacts</h3>
         {PROJECTS.map((p) => (
@@ -211,7 +224,7 @@ export const StudioApp: React.FC = () => {
         ))}
       </div>
 
-      {/* Preview Monitor */}
+      {/* preview monitor */}
       <div className="flex-1 glass border-white/10 p-6 flex flex-col relative overflow-hidden rounded-2xl">
         <div className="absolute top-0 right-0 p-3 z-20">
           <div className="flex gap-2">
@@ -274,7 +287,7 @@ export const StudioApp: React.FC = () => {
 
               <div className="mt-6 flex flex-row gap-3">
                 <a href={selectedProject.links.code} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-[10px] font-bold text-center transition-all flex items-center justify-center gap-2">
-                  <span>📦</span> Source Code
+                  <span></span> Source Code
                 </a>
                 {selectedProject.links.live && (
                   <a href={selectedProject.links.live} target="_blank" rel="noopener noreferrer" className="flex-1 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-[10px] font-bold shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all active:scale-95 flex items-center justify-center">
@@ -381,12 +394,12 @@ export const StudioApp: React.FC = () => {
 
   return (
     <div className="flex flex-row h-full bg-[#0a0c10] text-slate-300 font-sans overflow-hidden relative">
-      {/* Subtle Grid Overlay */}
+      {/* grid overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.05]"
         style={{ backgroundImage: `linear-gradient(#06b6d4 1px, transparent 1px), linear-gradient(90deg, #06b6d4 1px, transparent 1px)`, backgroundSize: '40px 40px' }}
       />
 
-      {/* Sidebar Nav - Bottom on mobile, Side on desktop */}
+      {/* sidebar nav - bottom on mobile, side on desktop */}
       <aside className="w-20 border-r border-white/5 flex flex-col items-center justify-start py-8 gap-8 shrink-0 bg-black/40 backdrop-blur-xl relative z-10">
         <div className="w-10 h-10 bg-cyan-600 rounded-xl flex items-center justify-center text-white font-black shadow-[0_0_20px_rgba(6,182,212,0.5)] text-base">D</div>
         <nav className="flex flex-col gap-4">
@@ -425,7 +438,6 @@ export const StudioApp: React.FC = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 relative z-10">
         <header className="h-20 border-b border-white/5 flex items-center justify-between px-10 shrink-0 bg-black/20 backdrop-blur-md">
           <div className="flex items-center gap-3 min-w-0">

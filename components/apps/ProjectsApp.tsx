@@ -32,12 +32,21 @@ interface DevProject {
 
 const DEV_PROJECTS: DevProject[] = [
   {
+    id: 'be-endless',
+    title: 'BE Endless 3D Studio',
+    date: 'Jan 2026',
+    desc: 'Premium 3D Printing & Customization E-Commerce Platform with sleek animations and sophisticated aesthetic.',
+    features: ['E-Commerce Cart & Checkout', 'Custom .stl/.obj Uploads', 'Scroll-Triggered Animations'],
+    stack: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Slick'],
+    links: { live: 'https://www.endless3dprinting.com/', code: 'https://github.com/shahidsk0403/be-endless-3d-studio' }
+  },
+  {
     id: 'dekonstrt',
     title: 'DEKONSTRT',
     date: 'Dec 2024',
     desc: 'AI-Powered Code Analysis & Deconstruction Tool designed to turn complex source code into beginner-level understanding through semantic analysis.',
     features: ['Semantic Code Analysis', 'Beginner-Friendly Explanations', 'Real-time Deconstruction'],
-    stack: ['React 19', 'TypeScript', 'Tailwind', 'API'],
+    stack: ['React 19', 'TypeScript', 'Tailwind', 'GitHub API'],
     links: { code: 'https://github.com/durraniadil13' }
   },
   {
@@ -46,7 +55,7 @@ const DEV_PROJECTS: DevProject[] = [
     date: 'Dec 2024',
     desc: 'Specialized AI Digitization & Linguistic Analysis Suite for digitizing and translating Urdu poetry archives into structured logical objects.',
     features: ['Urdu Poetry Archiving', 'Linguistic Analysis', 'Structured Object Generation'],
-    stack: ['React', 'TypeScript', 'Tailwind', 'AI Integration'],
+    stack: ['React', 'TypeScript', 'Tailwind', 'Gemini'],
     links: { code: 'https://github.com/durraniadil13' }
   },
   {
@@ -55,8 +64,8 @@ const DEV_PROJECTS: DevProject[] = [
     date: 'Dec 2024',
     desc: 'Personal Literary-Tech Identity Site serving as an interactive convergence of professional engineering and literary artistry.',
     features: ['Interactive Convergence', 'Themed Pages', 'Motion Animations'],
-    stack: ['React', 'TypeScript', 'Framer Motion'],
-    links: { live: 'https://durraniadil.com', code: 'https://github.com/durraniadil13' }
+    stack: ['React', 'TypeScript', 'Framer Motion', 'Firebase'],
+    links: { code: 'https://github.com/durraniadil13' }
   },
   {
     id: 'notepad',
@@ -65,7 +74,7 @@ const DEV_PROJECTS: DevProject[] = [
     desc: 'Feature-rich notepad with resizable workspace and real-time word count tracker.',
     features: ['Resizable Workspace', 'Real-time Word Count', 'Dark Mode Toggle', 'Save-as-Text'],
     stack: ['JavaScript', 'HTML5', 'CSS3'],
-    links: { code: 'https://github.com/durraniadil13' }
+    links: { code: 'https://github.com/DurraniAdil/NotePad' }
   },
   {
     id: 'random-quote',
@@ -74,7 +83,7 @@ const DEV_PROJECTS: DevProject[] = [
     desc: 'Dynamic quote generator with instant copy-to-clipboard functionality and API integration.',
     features: ['Fetch API Integration', 'Social Sharing', 'Dynamic Styling'],
     stack: ['JavaScript', 'Fetch API', 'Tailwind CSS'],
-    links: { live: 'https://durraniadil13.github.io/random-quote-machine/', code: 'https://github.com/durraniadil13' }
+    links: { code: 'https://github.com/DurraniAdil/Random-Quote-Machine' }
   },
   {
     id: 'pokedex',
@@ -83,7 +92,7 @@ const DEV_PROJECTS: DevProject[] = [
     desc: 'Interactive Pokémon encyclopedia powered by PokéAPI with search and filter functionality.',
     features: ['Detailed Stats & Evo Chains', 'Search & Filter', 'Responsive UI'],
     stack: ['JavaScript', 'REST API', 'CSS3'],
-    links: { code: 'https://github.com/durraniadil13' }
+    links: { code: 'https://github.com/DurraniAdil/Pok-dex' }
   },
   {
     id: 'authapp',
@@ -92,7 +101,7 @@ const DEV_PROJECTS: DevProject[] = [
     desc: 'Full-stack authentication system with Google Sign-in and Push Notifications.',
     features: ['Firebase Auth', 'Google Sign-in', 'Push Notifications (FCM)'],
     stack: ['Next.js', 'React Native', 'Firebase', 'Expo'],
-    links: { code: 'https://github.com/durraniadil13' }
+    links: { code: 'https://github.com/DurraniAdil/Authapp' }
   },
   {
     id: 'employwise',
@@ -101,7 +110,7 @@ const DEV_PROJECTS: DevProject[] = [
     desc: 'Responsive employee management system frontend with protected routes.',
     features: ['User Auth Flow', 'Protected Routes', 'CRUD Operations'],
     stack: ['React', 'React Router', 'Bootstrap'],
-    links: { code: 'https://github.com/durraniadil13' }
+    links: { code: 'https://github.com/DurraniAdil/Employ-Wise' }
   }
 ];
 
@@ -189,7 +198,7 @@ export const ProjectsApp: React.FC<ProjectsAppProps> = ({ updateTitle }) => {
 
   const renderDevView = () => (
     <div className="h-full flex flex-col bg-[#05070a]">
-      {/* Sub Navigation */}
+      {/* sub navigation */}
       <div className="h-16 shrink-0 flex items-center justify-between px-8 border-b border-white/5 bg-black/40 backdrop-blur-md">
         <div className="flex gap-4">
           <button
@@ -220,8 +229,9 @@ export const ProjectsApp: React.FC<ProjectsAppProps> = ({ updateTitle }) => {
               </div>
             </div>
           )}
-          <button onClick={() => changeMode('chooser')} className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white/40" title="Switch Mode">
-            <RotateCcw size={16} />
+          <button onClick={() => changeMode('chooser')} className="flex items-center gap-2 px-3 py-1.5 hover:bg-stone-200 rounded-lg transition-colors text-stone-500 hover:text-stone-700" title="Switch Mode">
+            <RotateCcw size={14} />
+            <span className="text-[10px] font-bold uppercase tracking-widest">Switch View</span>
           </button>
         </div>
       </div>
@@ -246,7 +256,7 @@ export const ProjectsApp: React.FC<ProjectsAppProps> = ({ updateTitle }) => {
               exit={{ opacity: 0, x: 20 }}
               className="h-full overflow-auto p-8 custom-scrollbar"
             >
-              {/* Impact Strip */}
+              {/* impact strip */}
               <div className="mb-10 grid grid-cols-3 gap-6">
                 {[
                   { label: 'Satisfaction Rate', value: '95%+', icon: CheckCircle, color: 'text-emerald-400' },
@@ -268,7 +278,7 @@ export const ProjectsApp: React.FC<ProjectsAppProps> = ({ updateTitle }) => {
                 })}
               </div>
 
-              {/* Project Grid */}
+              {/* project grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredDev.map(p => (
                   <motion.div
@@ -334,8 +344,9 @@ export const ProjectsApp: React.FC<ProjectsAppProps> = ({ updateTitle }) => {
         <div className="flex items-center gap-2">
           <h2 className="newspaper text-xl font-bold italic text-stone-900">Archive Navigator</h2>
         </div>
-        <button onClick={() => changeMode('chooser')} className="p-2 hover:bg-stone-200 rounded-lg transition-colors text-stone-400" title="Switch Mode">
-          🔄
+        <button onClick={() => changeMode('chooser')} className="flex items-center gap-2 px-3 py-1.5 hover:bg-black rounded-lg transition-colors text-stone-500 hover:text-white" title="Switch Mode">
+          <RotateCcw size={14} />
+          <span className="text-[10px] font-bold uppercase tracking-widest">Switch View</span>
         </button>
       </div>
       <div className="flex-1 overflow-hidden">

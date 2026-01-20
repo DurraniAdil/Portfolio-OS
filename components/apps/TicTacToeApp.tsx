@@ -14,9 +14,9 @@ export const TicTacToeApp: React.FC = () => {
   const [scores, setScores] = useState({ X: 0, O: 0, Draws: 0 });
 
   const winningCombinations = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Cols
-    [0, 4, 8], [2, 4, 6]             // Diags
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
   ];
 
   const calculateWinner = (squares: Player[]) => {
@@ -62,16 +62,16 @@ export const TicTacToeApp: React.FC = () => {
     setWinningLine([]);
   };
 
-  // Basic AI for PvE
+  // basic logic for pve
   useEffect(() => {
     if (mode === 'PvE' && !isXNext && !winner) {
       const timer = setTimeout(() => {
         const emptySquares = board.map((val, idx) => (val === null ? idx : null)).filter(val => val !== null) as number[];
         if (emptySquares.length > 0) {
-          // Try to win or block
+          // try to win or block
           let move = -1;
 
-          // Win check
+          // win check
           for (let combo of winningCombinations) {
             const [a, b, c] = combo;
             const values = [board[a], board[b], board[c]];
@@ -81,7 +81,7 @@ export const TicTacToeApp: React.FC = () => {
             }
           }
 
-          // Block check
+          // block check
           if (move === -1) {
             for (let combo of winningCombinations) {
               const [a, b, c] = combo;
@@ -93,7 +93,7 @@ export const TicTacToeApp: React.FC = () => {
             }
           }
 
-          // Random move if no win/block
+          // random move if no win/block
           if (move === -1) {
             move = emptySquares[Math.floor(Math.random() * emptySquares.length)];
           }
@@ -107,7 +107,7 @@ export const TicTacToeApp: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col bg-zinc-950 text-white font-sans overflow-hidden">
-      {/* App Header */}
+
       <header className="h-14 border-b border-white/5 bg-black/40 flex items-center justify-between px-6 shrink-0 relative z-10">
         <div className="flex items-center gap-3">
           <span className="text-xl">🎮</span>
@@ -127,10 +127,8 @@ export const TicTacToeApp: React.FC = () => {
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-        {/* Background ambient light */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-zinc-950 to-purple-900/10 pointer-events-none" />
 
-        {/* Score Board */}
         <div className="flex gap-6 mb-6 relative z-10">
           <div className="flex flex-col items-center">
             <span className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-1">Player X</span>
@@ -146,7 +144,6 @@ export const TicTacToeApp: React.FC = () => {
           </div>
         </div>
 
-        {/* Game Board */}
         <div className="grid grid-cols-3 gap-2 bg-white/5 p-2 rounded-2xl border border-white/10 backdrop-blur-xl relative z-10 shadow-2xl">
           {board.map((cell, i) => (
             <motion.button
@@ -183,7 +180,6 @@ export const TicTacToeApp: React.FC = () => {
           ))}
         </div>
 
-        {/* Footer Status */}
         <div className="mt-6 flex flex-col items-center relative z-10">
           <AnimatePresence mode="wait">
             {winner ? (
@@ -219,7 +215,6 @@ export const TicTacToeApp: React.FC = () => {
         </div>
       </main>
 
-      {/* OS Status Strip */}
       <footer className="h-10 bg-black/60 border-t border-white/5 px-8 flex items-center justify-between shrink-0 relative z-20">
         <div className="flex gap-6 text-[9px] font-black uppercase tracking-widest text-zinc-600">
           <span className="flex items-center gap-1.5">

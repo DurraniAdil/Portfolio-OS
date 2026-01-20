@@ -78,7 +78,21 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <div className="flex flex-col gap-3">
                 {project.isPrivate ? (
                   <div className="p-4 bg-zinc-900/50 border border-white/5 rounded-2xl flex items-center gap-4">
-                    <span className="text-2xl">🔒</span>
+                    {/* <span className="text-2xl">🔒</span> long way to do this but i can basically do anything tbh using this*/}
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-zinc-700"
+                    >
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
                     <div>
                       <div className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">Restricted Access</div>
                       <div className="text-[11px] font-medium text-zinc-500">Source code protected via NDAs / Enterprise security protocols.</div>

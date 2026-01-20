@@ -8,6 +8,7 @@ import { useWindowManager } from './hooks/useWindowManager';
 import { StudioApp } from './components/apps/StudioApp';
 import { BardApp } from './components/apps/BardApp';
 import { PeopleOpsApp } from './components/apps/PeopleOpsApp';
+import { GalleryApp } from './components/apps/GalleryApp';
 import { TerminalApp } from './components/apps/TerminalApp';
 import { WeatherApp } from './components/apps/WeatherApp';
 import { ProjectsApp } from './components/apps/ProjectsApp';
@@ -145,16 +146,24 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleStartMatrix = () => setIsMatrixActive(true);
+    const handleSystemReboot = () => {
+      closeAll();
+      setBootStatus('booting');
+    };
     window.addEventListener('startMatrix', handleStartMatrix);
-    return () => window.removeEventListener('startMatrix', handleStartMatrix);
-  }, []);
+    window.addEventListener('systemReboot', handleSystemReboot);
+    return () => {
+      window.removeEventListener('startMatrix', handleStartMatrix);
+      window.removeEventListener('systemReboot', handleSystemReboot);
+    };
+  }, [closeAll]);
 
   useEffect(() => {
     if (focusedId) {
       let wall = '';
-      if (focusedId === 'studio') wall = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop';
-      if (focusedId === 'bard') wall = 'https://images.unsplash.com/photo-1472289175570-1f6784206758?q=80&w=2670&auto=format&fit=crop';
-      if (focusedId === 'peopleops') wall = 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=2564&auto=format&fit=crop';
+      if (focusedId === 'studio') wall = `${import.meta.env.BASE_URL}media/studio-app-bg.png`;
+      if (focusedId === 'bard') wall = `${import.meta.env.BASE_URL}media/bard-bg.png`;
+      if (focusedId === 'peopleops') wall = `${import.meta.env.BASE_URL}media/people-ops-bg.png`;
 
       if (wall) {
         window.dispatchEvent(new CustomEvent('setWallpaper', { detail: wall }));
@@ -181,6 +190,7 @@ const App: React.FC = () => {
       case 'studio': return <StudioApp />;
       case 'bard': return <BardApp onOpenApp={openApp} />;
       case 'peopleops': return <PeopleOpsApp />;
+      case 'gallery': return <GalleryApp />;
       case 'terminal': return <TerminalApp onOpenApp={openApp} />;
       case 'weather': return <WeatherApp />;
       case 'projects': return <ProjectsApp updateTitle={(title) => updateWindowBounds('projects', { title })} />;
@@ -334,7 +344,15 @@ const App: React.FC = () => {
                           }}
                           className="flex items-center gap-4 p-4 hover:bg-white/5 rounded-2xl transition-all group"
                         >
-                          <span className="text-3xl grayscale group-hover:grayscale-0 transition-all">{meta.icon}</span>
+                          {meta.icon.includes('/') || meta.icon.endsWith('.png') ? (
+                            <img
+                              src={meta.icon.startsWith('http') ? meta.icon : `${import.meta.env.BASE_URL}${meta.icon}`}
+                              alt={meta.title}
+                              className="w-10 h-10 object-contain grayscale group-hover:grayscale-0 transition-all"
+                            />
+                          ) : (
+                            <span className="text-3xl grayscale group-hover:grayscale-0 transition-all">{meta.icon}</span>
+                          )}
                           <div className="text-left">
                             <div className="text-sm font-black text-white group-hover:text-blue-400 transition-colors uppercase tracking-widest">{meta.title}</div>
                             <div className="text-[10px] text-white/40 font-medium">{meta.description}</div>

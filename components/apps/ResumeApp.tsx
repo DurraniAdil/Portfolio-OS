@@ -1,3 +1,7 @@
+//what a ride it was
+//what a ride it was
+//what a ride it was
+//caved in the end and ended up hardcoding it *sad emoji*
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -31,7 +35,7 @@ export const ResumeApp: React.FC = () => {
 
   const renderDeveloperResume = () => (
     <div className="resume-container">
-      {/* PAGE 1 */}
+      {/* first page */}
       <div className="resume-page">
         <div className="resume-paper font-sans">
           <header className="text-center mb-6">
@@ -114,7 +118,7 @@ export const ResumeApp: React.FC = () => {
         </div>
       </div>
 
-      {/* PAGE 2 */}
+      {/* second page */}
       <div className="resume-page">
         <div className="resume-paper font-sans">
           <header className="text-center mb-6 pb-3 border-b border-zinc-200">
@@ -216,7 +220,7 @@ export const ResumeApp: React.FC = () => {
 
   const renderWriterResume = () => (
     <div className="resume-container">
-      {/* PAGE 1 */}
+      {/* page one */}
       <div className="resume-page">
         <div className="resume-paper font-serif">
           <header className="text-center mb-6">
@@ -299,7 +303,7 @@ export const ResumeApp: React.FC = () => {
         </div>
       </div>
 
-      {/* PAGE 2 */}
+      {/* page two */}
       <div className="resume-page">
         <div className="resume-paper font-serif">
           <header className="text-center mb-6 pb-3 border-b border-zinc-200">
@@ -399,7 +403,7 @@ export const ResumeApp: React.FC = () => {
 
   const renderOperationsResume = () => (
     <div className="resume-container">
-      {/* PAGE 1 */}
+      {/* page one */}
       <div className="resume-page">
         <div className="resume-paper font-sans">
           <header className="text-center mb-6">
@@ -467,7 +471,7 @@ export const ResumeApp: React.FC = () => {
         </div>
       </div>
 
-      {/* PAGE 2 */}
+      {/* page two */}
       <div className="resume-page">
         <div className="resume-paper font-sans">
           <header className="text-center mb-6 pb-3 border-b border-zinc-200">
@@ -561,7 +565,7 @@ export const ResumeApp: React.FC = () => {
 
   return (
     <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200 flex flex-col overflow-hidden">
-      {/* App Toolbar */}
+      {/* toolbar */}
       <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -597,7 +601,7 @@ export const ResumeApp: React.FC = () => {
             const fileName = resumeFiles[activeTab];
             const pdfUrl = `${import.meta.env.BASE_URL}media/${fileName}`;
 
-            // Try to download the specific resume, fallback to print
+            // cried
             fetch(pdfUrl, { method: 'HEAD' })
               .then(res => {
                 if (res.ok) {
@@ -620,7 +624,7 @@ export const ResumeApp: React.FC = () => {
 
       </motion.div>
 
-      {/* PDF View Container */}
+      {/* pdf view container */}
       <div className="flex-1 overflow-auto p-6 custom-scrollbar flex flex-col items-center print:p-0 print:overflow-visible">
         <AnimatePresence mode="wait">
           <motion.div
@@ -638,7 +642,7 @@ export const ResumeApp: React.FC = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Page metadata footer */}
+        {/* page metadata footer */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

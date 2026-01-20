@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { WindowState, WindowBounds } from '../../types';
 
@@ -38,14 +37,12 @@ export const Window: React.FC<WindowProps> = ({
   const dragOffset = useRef({ x: 0, y: 0 });
   const resizeStart = useRef({ x: 0, y: 0, w: 0, h: 0, left: 0, top: 0 });
 
-  // Sync state if external changes happen (like maximize or snapping from parent)
   useEffect(() => {
     if (!isDragging && !isResizing) {
       setBounds({ x: window.x, y: window.y, width: window.width, height: window.height });
     }
   }, [window.x, window.y, window.width, window.height, isDragging, isResizing]);
 
-  // Global cursor handling to prevent flickering during fast mouse movements
   useEffect(() => {
     if (isResizing && resizeDir) {
       const cursorMap: Record<string, string> = {
@@ -53,7 +50,6 @@ export const Window: React.FC<WindowProps> = ({
         ne: 'nesw-resize', sw: 'nesw-resize', nw: 'nwse-resize', se: 'nwse-resize'
       };
       document.body.style.cursor = cursorMap[resizeDir] || 'default';
-      // Disable text selection while resizing
       document.body.style.userSelect = 'none';
     } else if (isDragging) {
       document.body.style.cursor = 'grabbing';
@@ -74,7 +70,7 @@ export const Window: React.FC<WindowProps> = ({
     onFocus();
     if (window.isMaximized) return;
     setIsDragging(true);
-    e.preventDefault(); // Prevent scrolling on touch
+    e.preventDefault();
     dragOffset.current = {
       x: e.clientX - (typeof bounds.x === 'number' ? bounds.x : 0),
       y: e.clientY - (typeof bounds.y === 'number' ? bounds.y : 0)
@@ -240,13 +236,13 @@ export const Window: React.FC<WindowProps> = ({
       >
         {!window.isMaximized && !window.isMinimized && (
           <>
-            {/* Optimized Edge Hit Areas with Persisting Cursors */}
+            {/* hits areas */}
             <div onPointerDown={(e) => handleResizeStart(e, 'n')} className="absolute -top-1 left-1 right-1 h-3 cursor-ns-resize z-10 hover:bg-white/5" />
             <div onPointerDown={(e) => handleResizeStart(e, 's')} className="absolute -bottom-1 left-1 right-1 h-3 cursor-ns-resize z-10 hover:bg-white/5" />
             <div onPointerDown={(e) => handleResizeStart(e, 'w')} className="absolute top-1 bottom-1 -left-1 w-3 cursor-ew-resize z-10 hover:bg-white/5" />
             <div onPointerDown={(e) => handleResizeStart(e, 'e')} className="absolute top-1 bottom-1 -right-1 w-3 cursor-ew-resize z-10 hover:bg-white/5" />
 
-            {/* Precise Corner Hit Areas */}
+            {/* precise hitareas */}
             <div onPointerDown={(e) => handleResizeStart(e, 'nw')} className="absolute -top-1 -left-1 w-5 h-5 cursor-nwse-resize z-20 hover:bg-blue-400/10" />
             <div onPointerDown={(e) => handleResizeStart(e, 'ne')} className="absolute -top-1 -right-1 w-5 h-5 cursor-nesw-resize z-20 hover:bg-blue-400/10" />
             <div onPointerDown={(e) => handleResizeStart(e, 'sw')} className="absolute -bottom-1 -left-1 w-5 h-5 cursor-nesw-resize z-20 hover:bg-blue-400/10" />
@@ -261,7 +257,17 @@ export const Window: React.FC<WindowProps> = ({
             onDoubleClick={(e) => { e.stopPropagation(); onMaximize(); }}
           >
             <div className="flex items-center gap-2">
-              <span className="text-sm">{window.icon}</span>
+              <span className="text-sm">
+                {window.icon.includes('/') || window.icon.endsWith('.png') ? (
+                  <img
+                    src={window.icon.startsWith('http') ? window.icon : `${import.meta.env.BASE_URL}${window.icon}`}
+                    alt="icon"
+                    className="w-4 h-4 object-contain"
+                  />
+                ) : (
+                  window.icon
+                )}
+              </span>
               <span className="text-xs font-medium text-white/80">{window.title}</span>
             </div>
             <div className="flex gap-2">

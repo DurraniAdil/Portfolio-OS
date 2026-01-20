@@ -123,7 +123,7 @@ export const CalculatorApp: React.FC = () => {
                     }}>
 
                     <div className="bg-gradient-to-br from-slate-700 to-slate-800 p-6 w-80">
-                        {/* Brand Header */}
+
                         <div className="mb-4 flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-red-500 animate-pulse"
@@ -143,7 +143,6 @@ export const CalculatorApp: React.FC = () => {
                             <div className="text-[8px] text-slate-500 font-mono">v1.0</div>
                         </div>
 
-                        {/* LCD Display with scanlines */}
                         <div className="relative mb-6 bg-green-950 p-4 overflow-hidden"
                             style={{
                                 boxShadow: `
@@ -153,7 +152,6 @@ export const CalculatorApp: React.FC = () => {
                                  `
                             }}>
 
-                            {/* Scanlines effect */}
                             <div className="absolute inset-0 pointer-events-none z-10"
                                 style={{
                                     background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
@@ -161,11 +159,9 @@ export const CalculatorApp: React.FC = () => {
                                 }}
                             />
 
-                            {/* Screen glare */}
                             <div className="absolute inset-0 bg-gradient-to-br from-green-400/10 via-transparent to-transparent pointer-events-none z-10" />
 
                             <div className="relative z-20">
-                                {/* Equation display */}
                                 <div className="text-right text-green-500/60 text-xs h-5 font-mono truncate mb-1"
                                     style={{
                                         textShadow: '0 0 4px rgba(34, 197, 94, 0.8)',
@@ -175,7 +171,6 @@ export const CalculatorApp: React.FC = () => {
                                     {equation || '\u00A0'}
                                 </div>
 
-                                {/* Main display */}
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={display}
@@ -197,7 +192,6 @@ export const CalculatorApp: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Button Grid */}
                         <div className="grid grid-cols-4 gap-2">
                             {buttons.map((btn, i) => (
                                 <motion.button
@@ -220,7 +214,6 @@ export const CalculatorApp: React.FC = () => {
                             ))}
                         </div>
 
-                        {/* Footer decorative elements */}
                         <div className="mt-4 flex items-center justify-center gap-2">
                             {[...Array(8)].map((_, i) => (
                                 <div
