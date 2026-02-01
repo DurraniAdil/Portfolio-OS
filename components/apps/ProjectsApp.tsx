@@ -38,7 +38,7 @@ const DEV_PROJECTS: DevProject[] = [
     desc: 'Premium 3D Printing & Customization E-Commerce Platform with sleek animations and sophisticated aesthetic.',
     features: ['E-Commerce Cart & Checkout', 'Custom .stl/.obj Uploads', 'Scroll-Triggered Animations'],
     stack: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Slick'],
-    links: { live: 'https://www.endless3dprinting.com/', code: 'https://github.com/shahidsk0403/be-endless-3d-studio' }
+    links: { live: 'https://www.endless3dprinting.com/' }
   },
   {
     id: 'dekonstrt',
