@@ -77,19 +77,6 @@ export const DeviceGuard = ({
         return () => clearInterval(timer);
     }, [showWarning, redirectUrl]);
 
-    const handleOverride = () => {
-        localStorage.setItem('portfolio-os-override', 'true');
-        setShowWarning(false);
-    };
-
-    // check override
-    useEffect(() => {
-        const override = localStorage.getItem('portfolio-os-override');
-        if (override === 'true') {
-            setShowWarning(false);
-        }
-    }, []);
-
     return (
         <AnimatePresence>
             {showWarning && (
