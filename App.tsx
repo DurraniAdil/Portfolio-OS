@@ -4,6 +4,7 @@ import { LoginScreen } from './components/os/LoginScreen';
 import { Desktop } from './components/os/Desktop';
 import { Taskbar } from './components/os/Taskbar';
 import { Window } from './components/os/Window';
+import { DeviceGuard } from './components/os/DeviceGuard';
 import { useWindowManager } from './hooks/useWindowManager';
 import { StudioApp } from './components/apps/StudioApp';
 import { BardApp } from './components/apps/BardApp';
@@ -210,11 +211,21 @@ const App: React.FC = () => {
 
   return (
     <div className="h-screen w-screen overflow-hidden relative">
+      {/* Device Guard - redirects mobile users to mobile-optimized Portfolio-App */}
+      <DeviceGuard
+        redirectUrl="https://durraniadil.github.io/Portfolio-Portal/"
+        breakpoint={768}
+        waitForBoot={true}
+      />
+
       <AnimatePresence>
         {isMatrixActive && <MatrixRain onStop={() => setIsMatrixActive(false)} />}
       </AnimatePresence>
 
-      {bootStatus === 'booting' && <BootScreen onComplete={() => setBootStatus('login')} />}
+      {bootStatus === 'booting' && <BootScreen onComplete={() => {
+        window.dispatchEvent(new CustomEvent('bootComplete'));
+        setBootStatus('login');
+      }} />}
 
       {bootStatus === 'login' && <LoginScreen onLogin={handleLogin} onReboot={handleRestart} />}
 
