@@ -38,7 +38,7 @@ const PROJECTS: Project[] = [
       'Scroll-triggered animations with fade-in, slide-up & zoom effects'
     ],
     tech: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Slick'],
-    links: { live: 'https://www.endless3dprinting.com/', code: 'https://github.com/shahidsk0403/be-endless-3d-studio' }
+    links: { live: 'https://www.endless3dprinting.com/' }
   },
   {
     id: 'dekonstrt',
