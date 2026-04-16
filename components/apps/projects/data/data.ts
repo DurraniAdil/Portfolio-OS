@@ -13,6 +13,22 @@ export interface PersonalProject {
 
 export const PERSONAL_PROJECTS: PersonalProject[] = [
   {
+    id: 'where-is-my-cafe',
+    title: 'Where Is My Café?',
+    role: 'Tech Lead & Sole Developer',
+    status: 'Public',
+    description: 'Hyper-Local Cafe Discovery Platform — startup-level SPA for Aurangabad.',
+    bullets: [
+      'Built a startup-level SPA for Aurangabad using React 19, TypeScript, and Vite. Backend powered by Node.js, Express, and MongoDB Atlas.',
+      'Integrated Leaflet with CARTO custom basemaps and Haversine distance tracking for precise geolocation and custom venue discovery.',
+      'Implemented algorithmic marker clustering to cleanly represent 65+ custom venues across distinct city zones.',
+      'Shipped a "Trip Planner" for social cafe visits with RSVP logic and "Memories" branding.',
+      'Developed custom "Boneyard" skeleton loading system and geocoding pipelines using OSM Nominatim.'
+    ],
+    stack: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MongoDB Atlas', 'Leaflet', 'Vite', 'Render', 'Vercel'],
+    links: { live: 'https://whereismycafe.vercel.app/' }
+  },
+  {
     id: 'muse',
     title: 'Muse',
     role: 'Creator & Lead Developer',

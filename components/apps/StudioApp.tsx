@@ -15,6 +15,19 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
+    id: 'where-is-my-cafe',
+    title: 'Where Is My Café?',
+    date: '2026',
+    desc: 'Hyper-Local Cafe Discovery Platform',
+    bullets: [
+      'Built a startup-level SPA for Aurangabad using React 19, TypeScript, and Vite',
+      'Integrated Leaflet with custom basemaps and Haversine distance tracking',
+      'Developed custom "Boneyard" skeleton loading system for pixel-perfect UX'
+    ],
+    tech: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MongoDB Atlas', 'Leaflet'],
+    links: { live: 'https://whereismycafe.vercel.app/' }
+  },
+  {
     id: 'muse',
     title: 'Muse',
     date: '2025',
