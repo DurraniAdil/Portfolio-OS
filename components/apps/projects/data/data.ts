@@ -29,6 +29,21 @@ export const PERSONAL_PROJECTS: PersonalProject[] = [
     links: { live: 'https://whereismycafe.vercel.app/' }
   },
   {
+    id: 'be-endless',
+    title: 'BE Endless 3D Studio',
+    role: 'Lead Developer',
+    status: 'Public',
+    description: 'Premium 3D Printing E-Commerce Platform — full-featured store with custom design uploads.',
+    bullets: [
+      'Built a full e-commerce experience with product catalog, integrated cart, and secure checkout.',
+      'Developed advanced customization features for .stl and .obj file uploads for 3D design submissions.',
+      'Implemented immersive scroll-triggered animations and responsive design systems.',
+      'Secured a premium user experience with real-time feedback and high-fidelity project previews.'
+    ],
+    stack: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Slick', 'Lucide React'],
+    links: { live: 'https://www.endless3dprinting.com/' }
+  },
+  {
     id: 'muse',
     title: 'Muse',
     role: 'Creator & Lead Developer',
